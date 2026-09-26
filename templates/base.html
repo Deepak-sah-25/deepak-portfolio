@@ -6,18 +6,43 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ profile.name }} | {{ profile.extended_title }}</title>
     
-    <!-- Meta SEO -->
-    <meta name="description" content="{{ profile.name }} - {{ profile.extended_title }}. {{ profile.hero_tagline }}">
-    <meta name="keywords" content="Deepak Sah Kanu, Django Developer, Full-Stack Developer, Python, Django, DRF, PostgreSQL, Multi-Tenant SaaS, Kathmandu, Lalitpur, Nepal">
-    <meta name="author" content="{{ profile.name }}">
+    <!-- Canonical URL -->
+    <link rel="canonical" href="{{ request.scheme }}://{{ request.get_host }}{{ request.path }}">
 
-    <!-- Open Graph / Social Media -->
-    <meta property="og:title" content="{{ profile.name }} | {{ profile.short_title }}">
-    <meta property="og:description" content="{{ profile.hero_tagline }}">
-    <meta property="og:type" content="website">
-    {% if profile.profile_image %}
-    <meta property="og:image" content="{{ profile.profile_image.url }}">
-    {% endif %}
+    <!-- Search Engine Indexing & Mobile Theme -->
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+    <meta name="theme-color" content="#0a0d14">
+    <meta name="author" content="{{ profile.name }}">
+    <meta name="geo.region" content="NP">
+    <meta name="geo.placename" content="Kathmandu, Lalitpur">
+
+    <!-- Meta SEO -->
+    <meta name="description" content="{{ profile.name }} - {{ profile.extended_title }}. {{ profile.hero_tagline }} Based in {{ profile.location }}. Specializing in Python, Django, DRF, and PostgreSQL.">
+    <meta name="keywords" content="Deepak Sah Kanu, Django Developer, Full-Stack Developer, Python, Django, DRF, PostgreSQL, Multi-Tenant SaaS, Kathmandu, Lalitpur, Nepal, Software Engineer">
+
+    <!-- Open Graph / Facebook / LinkedIn / WhatsApp -->
+    <meta property="og:type" content="profile">
+    <meta property="og:site_name" content="{{ profile.name }} - Portfolio">
+    <meta property="og:title" content="{{ profile.name }} | {{ profile.extended_title }}">
+    <meta property="og:description" content="{{ profile.hero_tagline }} Turning ideas into reliable, scalable web applications.">
+    <meta property="og:url" content="{{ request.scheme }}://{{ request.get_host }}{{ request.path }}">
+    <meta property="og:locale" content="en_US">
+    <meta property="profile:first_name" content="Deepak">
+    <meta property="profile:last_name" content="Sah Kanu">
+    <meta property="og:image" content="{{ request.scheme }}://{{ request.get_host }}{% if profile.profile_image %}{{ profile.profile_image.url }}{% else %}{% static 'images/deepak.jpg' %}{% endif %}">
+    <meta property="og:image:alt" content="{{ profile.name }} - {{ profile.short_title }}">
+
+    <!-- Twitter Card Meta -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="{{ profile.name }} | {{ profile.short_title }}">
+    <meta name="twitter:description" content="{{ profile.hero_tagline }}">
+    <meta name="twitter:image" content="{{ request.scheme }}://{{ request.get_host }}{% if profile.profile_image %}{{ profile.profile_image.url }}{% else %}{% static 'images/deepak.jpg' %}{% endif %}">
+
+    <!-- Glowing Brand Favicon -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='25' fill='%230a0d14'/><text x='50%' y='62%' font-size='50' font-weight='800' font-family='monospace' fill='%23a855f7' text-anchor='middle'>&lt;/&gt;</text></svg>">
+
+    <!-- Google Structured Data (JSON-LD) -->
+    {% include 'includes/schema_org.html' %}
 
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">

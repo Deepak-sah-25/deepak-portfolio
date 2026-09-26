@@ -5,7 +5,10 @@
 <!-- ==========================================================================
      Section 1: Hero Section
      ========================================================================== -->
-<section id="hero" class="hero-section">
+<section id="hero" class="hero-section" itemscope itemtype="https://schema.org/Person">
+    <meta itemprop="jobTitle" content="{{ profile.extended_title }}">
+    <meta itemprop="worksFor" content="{{ profile.current_company }}">
+    <meta itemprop="address" content="{{ profile.location }}">
     <div class="container-custom">
         <div class="hero-grid">
             <!-- Left Hero Content -->
@@ -16,7 +19,7 @@
                 </div>
 
                 <h1 class="hero-title">
-                    Hi, I'm <span class="text-gradient-purple">{{ profile.name }}</span><br>
+                    Hi, I'm <span class="text-gradient-purple" itemprop="name">{{ profile.name }}</span><br>
                     I build things for the web.
                 </h1>
 

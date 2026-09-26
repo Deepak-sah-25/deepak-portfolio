@@ -1,0 +1,66 @@
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Person",
+      "@id": "{{ request.scheme }}://{{ request.get_host }}/#person",
+      "name": "{{ profile.name }}",
+      "alternateName": "Deepak Sah",
+      "jobTitle": "{{ profile.extended_title }}",
+      "description": "{{ profile.hero_tagline }}",
+      "url": "{{ request.scheme }}://{{ request.get_host }}/",
+      "image": "{{ request.scheme }}://{{ request.get_host }}{% if profile.profile_image %}{{ profile.profile_image.url }}{% else %}/static/images/deepak.jpg{% endif %}",
+      "email": "mailto:{{ profile.email }}",
+      "telephone": "{{ profile.phone }}",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Lalitpur",
+        "addressRegion": "Kathmandu",
+        "addressCountry": "Nepal"
+      },
+      "worksFor": {
+        "@type": "Organization",
+        "name": "{{ profile.current_company }}"
+      },
+      "sameAs": [
+        "{{ profile.github_url }}",
+        "{{ profile.whatsapp_url }}"{% if profile.linkedin_url %},
+        "{{ profile.linkedin_url }}"{% endif %}
+      ],
+      "knowsAbout": [
+        "Python",
+        "Django",
+        "Django REST Framework",
+        "PostgreSQL",
+        "Multi-Tenant SaaS Development",
+        "django-tenants",
+        "Database Architecture",
+        "REST APIs",
+        "JavaScript",
+        "Bootstrap"
+      ]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "{{ request.scheme }}://{{ request.get_host }}/#website",
+      "url": "{{ request.scheme }}://{{ request.get_host }}/",
+      "name": "{{ profile.name }} | {{ profile.extended_title }}",
+      "description": "{{ profile.hero_tagline }}",
+      "author": {
+        "@id": "{{ request.scheme }}://{{ request.get_host }}/#person"
+      },
+      "inLanguage": "en-US"
+    },
+    {
+      "@type": "ProfilePage",
+      "@id": "{{ request.scheme }}://{{ request.get_host }}/#webpage",
+      "url": "{{ request.scheme }}://{{ request.get_host }}/",
+      "name": "{{ profile.name }} - Portfolio",
+      "mainEntity": {
+        "@id": "{{ request.scheme }}://{{ request.get_host }}/#person"
+      }
+    }
+  ]
+}
+</script>

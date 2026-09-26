@@ -123,3 +123,26 @@ class PortfolioTests(TestCase):
         response = self.client.get(reverse("portfolio:download_resume"))
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response["Content-Type"], "application/pdf")
+
+    def test_sitemap_xml(self):
+        response = self.client.get("/sitemap.xml")
+        self.assertEqual(response.status_code, 200)
+        self.assertIn("xml", response["Content-Type"])
+        self.assertContains(response, "<urlset")
+        self.assertContains(response, "<loc>")
+
+    def test_robots_txt(self):
+        response = self.client.get("/robots.txt")
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response["Content-Type"], "text/plain")
+        self.assertContains(response, "User-agent: *")
+        self.assertContains(response, "Sitemap:")
+
+    def test_seo_meta_and_structured_data(self):
+        response = self.client.get(reverse("portfolio:index"))
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, '<script type="application/ld+json">')
+        self.assertContains(response, '"@type": "Person"')
+        self.assertContains(response, "canonical")
+        self.assertContains(response, "og:site_name")
+        self.assertContains(response, "twitter:card")
