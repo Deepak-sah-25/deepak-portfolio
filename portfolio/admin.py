@@ -45,6 +45,7 @@ class ProfileAdmin(admin.ModelAdmin):
                 "fields": (
                     "email",
                     "phone",
+                    "whatsapp_number",
                     "github_url",
                     "linkedin_url",
                 )

@@ -448,13 +448,24 @@
                         </div>
                     </div>
 
-                    <!-- Phone -->
-                    {% if profile.phone %}
+                    <!-- Contact & WhatsApp -->
                     <div class="contact-detail-row">
                         <div class="contact-icon-circle">📞</div>
                         <div class="contact-detail-text">
-                            <h4>Phone</h4>
-                            <p>{{ profile.phone }}</p>
+                            <h4>Phone &amp; Call</h4>
+                            <a href="tel:{{ profile.phone }}">{{ profile.phone }}</a>
+                        </div>
+                    </div>
+
+                    <!-- WhatsApp Direct -->
+                    {% if profile.whatsapp_url %}
+                    <div class="contact-detail-row">
+                        <div class="contact-icon-circle" style="color: #22c55e; border-color: rgba(34, 197, 94, 0.4); background: rgba(34, 197, 94, 0.1);">💬</div>
+                        <div class="contact-detail-text">
+                            <h4>WhatsApp</h4>
+                            <a href="{{ profile.whatsapp_url }}" target="_blank" rel="noopener" style="color: #4ade80;">
+                                Chat on WhatsApp ({{ profile.whatsapp_number }}) ↗
+                            </a>
                         </div>
                     </div>
                     {% endif %}
@@ -471,6 +482,21 @@
                             </svg>
                         </a>
                         {% endif %}
+
+                        {% if profile.whatsapp_url %}
+                        <a href="{{ profile.whatsapp_url }}" target="_blank" rel="noopener" class="social-circle-btn" title="WhatsApp" style="color: #4ade80;">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M12.031 0C5.394 0 0 5.394 0 12.031c0 2.124.553 4.197 1.606 6.02L.065 24l6.126-1.606a11.97 11.97 0 005.84 1.506h.005c6.632 0 12.026-5.395 12.026-12.031A12.03 12.03 0 0012.031 0zm0 22.013h-.004a9.99 9.99 0 01-5.093-1.39l-.365-.217-3.784.992 1.01-3.688-.238-.379a9.988 9.988 0 01-1.536-5.299C2.021 6.51 6.51 2.022 12.031 2.022c2.673 0 5.186 1.042 7.076 2.934a9.96 9.96 0 012.929 7.076c0 5.522-4.49 10.011-10.005 10.011zm5.487-7.491c-.3-.15-1.776-.876-2.051-.976-.275-.1-.475-.15-.675.15-.2.3-.775.976-.95 1.176-.175.2-.35.225-.65.075-.3-.15-1.267-.467-2.414-1.488-.893-.796-1.495-1.78-1.67-2.08-.175-.3-.019-.462.131-.611.135-.134.3-.35.45-.525.15-.175.2-.3.3-.5.1-.2.05-.375-.025-.525-.075-.15-.675-1.625-.925-2.225-.244-.585-.492-.505-.675-.515-.175-.01-.375-.012-.575-.012s-.525.075-.8.375c-.275.3-1.05 1.025-1.05 2.5 0 1.475 1.075 2.9 1.225 3.1.15.2 2.115 3.23 5.125 4.53.716.31 1.275.495 1.71.633.72.228 1.375.196 1.892.119.577-.086 1.776-.725 2.026-1.425.25-.7.25-1.3.175-1.425-.075-.125-.275-.2-.575-.35z"/>
+                            </svg>
+                        </a>
+                        {% endif %}
+
+                        <a href="mailto:{{ profile.email }}" class="social-circle-btn" title="Email">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                                <polyline points="22,6 12,13 2,6"></polyline>
+                            </svg>
+                        </a>
 
                         {% if profile.linkedin_url %}
                         <a href="{{ profile.linkedin_url }}" target="_blank" rel="noopener" class="social-circle-btn" title="LinkedIn">

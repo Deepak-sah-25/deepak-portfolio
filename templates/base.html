@@ -97,6 +97,15 @@
                     <div class="footer-copy">
                         &copy; 2026 <strong>{{ profile.name }}</strong>. All rights reserved.
                     </div>
+                    <div style="display: flex; align-items: center; gap: 16px;">
+                        {% if profile.github_url %}
+                        <a href="{{ profile.github_url }}" target="_blank" rel="noopener" style="color: var(--text-secondary); text-decoration: none; font-size: 0.88rem;" title="GitHub">GitHub ↗</a>
+                        {% endif %}
+                        {% if profile.whatsapp_url %}
+                        <a href="{{ profile.whatsapp_url }}" target="_blank" rel="noopener" style="color: #4ade80; text-decoration: none; font-size: 0.88rem;" title="WhatsApp">WhatsApp ↗</a>
+                        {% endif %}
+                        <a href="mailto:{{ profile.email }}" style="color: var(--text-secondary); text-decoration: none; font-size: 0.88rem;">Email ↗</a>
+                    </div>
                     <div class="footer-made-with">
                         <span>Engineered with Python &amp; Django</span>
                         <span style="color: #ec4899;">♥</span>

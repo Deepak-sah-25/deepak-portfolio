@@ -38,13 +38,21 @@ class Profile(models.Model):
     current_company = models.CharField(max_length=150, default="Anjan lab company")
     current_role = models.CharField(max_length=150, default="Django Developer")
     location = models.CharField(max_length=100, default="Nepal")
-    email = models.CharField(max_length=150, default="contact@deepaksah.dev", blank=True)
-    phone = models.CharField(max_length=50, blank=True, default="+977 (Nepal)")
-    github_url = models.CharField(max_length=255, blank=True, default="https://github.com")
+    email = models.CharField(max_length=150, default="deepakraj90054@email.com", blank=True)
+    phone = models.CharField(max_length=50, blank=True, default="+977 9829014425")
+    whatsapp_number = models.CharField(max_length=50, blank=True, default="+977 9829014425")
+    github_url = models.CharField(max_length=255, blank=True, default="https://github.com/Deepak-sah-25")
     linkedin_url = models.CharField(max_length=255, blank=True, default="https://linkedin.com")
     resume_file = models.FileField(upload_to="resumes/", blank=True, null=True)
     profile_image = models.FileField(upload_to="profile/", blank=True, null=True)
     is_active = models.BooleanField(default=True)
+
+    @property
+    def whatsapp_url(self):
+        clean = "".join([c for c in (self.whatsapp_number or self.phone) if c.isdigit()])
+        if clean and not clean.startswith("977") and len(clean) == 10:
+            clean = "977" + clean
+        return f"https://wa.me/{clean}" if clean else ""
 
     class Meta:
         verbose_name = "Personal Profile"

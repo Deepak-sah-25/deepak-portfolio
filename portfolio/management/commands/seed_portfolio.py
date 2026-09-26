@@ -39,9 +39,10 @@ class Command(BaseCommand):
         profile.current_company = "Anjan lab company"
         profile.current_role = "Django Developer"
         profile.location = "Nepal"
-        profile.email = "deepak.developer@example.com"
-        profile.phone = "+977 (Nepal)"
-        profile.github_url = "https://github.com"
+        profile.email = "deepakraj90054@email.com"
+        profile.phone = "+977 9829014425"
+        profile.whatsapp_number = "+977 9829014425"
+        profile.github_url = "https://github.com/Deepak-sah-25"
         profile.linkedin_url = "https://linkedin.com"
         profile.profile_image = "profile/deepak.jpg"
         profile.is_active = True
