@@ -69,3 +69,32 @@ def project_detail_api(request, pk):
             "image_url": project.image.url if project.image else "",
         }
     )
+
+
+def download_resume_view(request):
+    from django.conf import settings
+    from django.http import FileResponse, HttpResponse
+
+    profile = Profile.objects.filter(is_active=True).first()
+    if profile and profile.resume_file:
+        try:
+            return FileResponse(
+                profile.resume_file.open("rb"),
+                as_attachment=True,
+                filename=f"Resume_{profile.name.replace(' ', '_')}.pdf",
+            )
+        except Exception:
+            pass
+
+    default_resume = settings.BASE_DIR / "static" / "files" / "Deepak_Sah_Kanu_Resume.pdf"
+    if default_resume.exists():
+        return FileResponse(
+            open(default_resume, "rb"),
+            as_attachment=True,
+            filename="Deepak_Sah_Kanu_Resume.pdf",
+        )
+
+    return HttpResponse(
+        "Deepak's resume PDF will be attached soon via Django Admin! You can upload it in Django Admin > Profile > Resume file.",
+        content_type="text/plain",
+    )

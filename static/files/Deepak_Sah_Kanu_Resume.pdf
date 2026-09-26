@@ -1,0 +1,84 @@
+%PDF-1.4
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Kids [3 0 R] /Count 1 >>
+endobj
+3 0 obj
+<< /Type /Page /Parent 2 0 R /Resources << /Font << /F1 4 0 R >> >> /MediaBox [0 0 595 842] /Contents 5 0 R >>
+endobj
+4 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>
+endobj
+5 0 obj
+<< /Length 1333 >>
+stream
+BT
+/F1 20 Tf
+50 800 Td
+(DEEPAK SAH KANU) Tj
+/F1 12 Tf
+0 -25 Td
+(Django Developer | Full-Stack Web Developer) Tj
+0 -20 Td
+(Email: deepakraj90054@email.com | Phone: +977 9829014425 | Nepal) Tj
+0 -20 Td
+(GitHub: https://github.com/Deepak-sah-25) Tj
+
+0 -35 Td
+/F1 14 Tf
+(PROFESSIONAL SUMMARY) Tj
+/F1 10 Tf
+0 -18 Td
+(Django Developer focused on building modern, scalable, secure, and user-friendly web applications.) Tj
+0 -15 Td
+(Specializes in Python, Django, DRF, PostgreSQL, and multi-tenant SaaS architecture.) Tj
+
+0 -30 Td
+/F1 14 Tf
+(EXPERIENCE) Tj
+/F1 11 Tf
+0 -18 Td
+(Django Developer - Anjan lab company (Nepal)) Tj
+/F1 10 Tf
+0 -15 Td
+(- Backend development and REST APIs using Django REST Framework) Tj
+0 -15 Td
+(- Database-driven applications with PostgreSQL and schema isolation) Tj
+0 -15 Td
+(- Appointment management, patient workflows, and hospital modules) Tj
+
+0 -30 Td
+/F1 14 Tf
+(CORE PROJECTS) Tj
+/F1 10 Tf
+0 -18 Td
+(1. Anjan Hospital Management System: Healthcare & clinical workflow platform) Tj
+0 -15 Td
+(2. Sadi Sewa: Wedding and event service multi-vendor booking marketplace) Tj
+0 -15 Td
+(3. Multi-Tenant SaaS Development: Schema isolation with django-tenants) Tj
+
+0 -30 Td
+/F1 14 Tf
+(TECHNICAL SKILLS) Tj
+/F1 10 Tf
+0 -18 Td
+(Python, Django, Django REST Framework, PostgreSQL, JavaScript, Bootstrap, Git, Linux) Tj
+ET
+endstream
+endobj
+xref
+0 6
+0000000000 65535 f 
+0000000009 00000 n 
+0000000058 00000 n 
+0000000115 00000 n 
+0000000241 00000 n 
+0000000311 00000 n 
+trailer
+<< /Size 6 /Root 1 0 R >>
+startxref
+1696
+%%EOF

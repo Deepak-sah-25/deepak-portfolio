@@ -118,3 +118,8 @@ class PortfolioTests(TestCase):
         self.assertEqual(str(self.service), "Django Backend & REST APIs")
         self.assertEqual(len(self.project.get_features_list()), 3)
         self.assertEqual(len(self.project.get_tech_list()), 4)
+
+    def test_download_resume_view(self):
+        response = self.client.get(reverse("portfolio:download_resume"))
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response["Content-Type"], "application/pdf")
