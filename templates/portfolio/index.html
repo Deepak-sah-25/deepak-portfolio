@@ -63,11 +63,30 @@
                 </div>
             </div>
 
-            <!-- Right Hero Visual: Cosmic Glow + Deepak's Portrait + Floating Code Card -->
+            <!-- Right Hero Visual: Round Shape Portrait with Purple Backdrop & Floating Code Card -->
             <div class="hero-visual reveal-init">
-                <div class="cosmic-circle-aura"></div>
-                
-                <div class="hero-portrait-frame">
+                <!-- Decorative Dot Grid (Top Right) -->
+                <div class="decor-dots-grid" aria-hidden="true">
+                    <span></span><span></span><span></span><span></span><span></span>
+                    <span></span><span></span><span></span><span></span><span></span>
+                    <span></span><span></span><span></span><span></span><span></span>
+                    <span></span><span></span><span></span><span></span><span></span>
+                    <span></span><span></span><span></span><span></span><span></span>
+                </div>
+
+                <!-- Cosmic Purple Backdrop Circle (Matching Reference Image) -->
+                <div class="hero-circle-backdrop"></div>
+
+                <!-- Hand-drawn Doodle Arrow (Bottom Left) -->
+                <div class="decor-arrow-wrap" aria-hidden="true">
+                    <svg class="decor-arrow-svg" width="60" height="60" viewBox="0 0 60 60" fill="none">
+                        <path d="M 10 48 C 4 30, 18 12, 45 20" stroke="rgba(255, 255, 255, 0.45)" stroke-width="2.2" stroke-linecap="round"/>
+                        <path d="M 33 14 L 46 20 L 37 32" stroke="rgba(255, 255, 255, 0.45)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </div>
+
+                <!-- Round Shape Photo Frame -->
+                <div class="hero-portrait-frame round-shape">
                     {% if profile.profile_image %}
                         <img src="{{ profile.profile_image.url }}" alt="{{ profile.name }}" class="hero-portrait-img">
                     {% else %}
@@ -75,24 +94,22 @@
                     {% endif %}
                 </div>
 
-                <!-- Floating Code Card (Replicating Design Reference) -->
+                <!-- Laptop Base Silhouette (Matching Reference Image) -->
+                <div class="hero-laptop-silhouette" aria-hidden="true">
+                    <div class="laptop-notch"></div>
+                </div>
+
+                <!-- Floating Code Card (Exact Match to Reference Image) -->
                 <div class="floating-code-card">
                     <div class="code-header">
-                        <div class="code-dots">
-                            <span class="code-dot dot-red"></span>
-                            <span class="code-dot dot-yellow"></span>
-                            <span class="code-dot dot-green"></span>
-                        </div>
                         <span class="code-title">&lt;/&gt; Code</span>
-                        <span class="code-live-indicator">● Active</span>
+                        <span class="code-green-dot" title="Active"></span>
                     </div>
                     <div class="code-body">
                         <span class="code-keyword">const</span> <span class="code-var">developer</span> = <span class="code-bracket">{</span><br>
-                        &nbsp;&nbsp;<span class="code-key">name</span>: <span class="code-str">"{{ profile.name }}"</span>,<br>
-                        &nbsp;&nbsp;<span class="code-key">role</span>: <span class="code-str">"{{ profile.short_title }}"</span>,<br>
-                        &nbsp;&nbsp;<span class="code-key">backend</span>: [<span class="code-str">"Python"</span>, <span class="code-str">"Django"</span>, <span class="code-str">"DRF"</span>],<br>
-                        &nbsp;&nbsp;<span class="code-key">database</span>: <span class="code-str">"PostgreSQL"</span>,<br>
-                        &nbsp;&nbsp;<span class="code-key">architecture</span>: <span class="code-str">"Multi-Tenant SaaS"</span><br>
+                        &nbsp;&nbsp;<span class="code-key">name</span>: <span class="code-str-orange">"{{ profile.name }}"</span>,<br>
+                        &nbsp;&nbsp;<span class="code-key">skills</span>: [<span class="code-str-orange">"Python"</span>, <span class="code-str-orange">"Django"</span>, <span class="code-str-orange">"DRF"</span>, <span class="code-str-orange">"PostgreSQL"</span>],<br>
+                        &nbsp;&nbsp;<span class="code-key">passion</span>: <span class="code-str-orange">"Building things for the web"</span><br>
                         <span class="code-bracket">}</span>;
                     </div>
                 </div>
