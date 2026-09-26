@@ -353,6 +353,37 @@
             </div>
             {% endfor %}
         </div>
+
+        {% if educations %}
+        <div style="margin-top: 55px;">
+            <div class="section-header-center reveal-init" style="margin-bottom: 24px;">
+                <div class="section-badge">ACADEMIC BACKGROUND</div>
+                <h3 style="font-size: 1.5rem; font-weight: 700; color: #fff; margin-top: 6px;">Education &amp; Studies</h3>
+            </div>
+
+            <div class="exp-timeline reveal-init">
+                {% for edu in educations %}
+                <div class="glass-card exp-card" style="border-left: 3px solid #8b5cf6;">
+                    <div class="exp-header">
+                        <div>
+                            <h3 class="exp-role" style="display: flex; align-items: center; gap: 8px;">
+                                <span>🎓</span> {{ edu.degree }}
+                            </h3>
+                            <div class="exp-company">{{ edu.institution }} &bull; {{ edu.location }}</div>
+                        </div>
+                        <span class="exp-badge" style="background: rgba(139, 92, 246, 0.15); color: #a78bfa; border: 1px solid rgba(139, 92, 246, 0.3);">{{ edu.period }}</span>
+                    </div>
+
+                    {% if edu.description %}
+                    <p style="color: var(--text-secondary); font-size: 0.92rem; line-height: 1.6; margin-top: 12px; margin-bottom: 0;">
+                        {{ edu.description }}
+                    </p>
+                    {% endif %}
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        {% endif %}
     </div>
 </section>
 

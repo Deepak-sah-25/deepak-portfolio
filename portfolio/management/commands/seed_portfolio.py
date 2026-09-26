@@ -5,6 +5,7 @@ from portfolio.models import (
     Skill,
     Project,
     Experience,
+    Education,
     Service,
 )
 
@@ -19,24 +20,24 @@ class Command(BaseCommand):
         profile, created = Profile.objects.get_or_create(id=1)
         profile.name = "Deepak Sah Kanu"
         profile.short_title = "Django Developer"
-        profile.extended_title = "Django Developer | Full-Stack Web Developer"
+        profile.extended_title = "Full-Stack Django Developer | DRF & PostgreSQL"
         profile.hero_tagline = "Building modern, scalable web applications with Django."
         profile.alternative_tagline = "Turning ideas into reliable, scalable web applications."
         profile.bio_intro = (
-            "I am Deepak Sah Kanu, a Django Developer and Full-Stack Web Developer focused on building modern, "
-            "scalable, secure, and user-friendly web applications. I primarily work with Python and Django on the backend "
-            "and HTML, CSS, JavaScript, and Bootstrap on the frontend."
+            "Results-driven Full-Stack Django Developer with over 2 years of experience in designing, "
+            "building, and deploying scalable web applications and RESTful APIs. Specializes in Python, "
+            "Django REST Framework (DRF), PostgreSQL, and multi-tenant SaaS architectures."
         )
         profile.bio_extended = (
-            "I enjoy transforming real-world requirements into clean, practical, and maintainable web applications. "
-            "My development interests include healthcare systems, service-booking platforms, REST APIs, authentication, "
-            "authorization, database-driven applications, and multi-tenant systems."
+            "Proven track record of developing robust backend systems, optimizing database performance, "
+            "and delivering secure, user-friendly solutions for the healthcare and e-commerce sectors. "
+            "Experienced with asynchronous task processing using Redis & Celery, and containerized deployment with Docker."
         )
         profile.career_goal = (
             "My goal is to grow as a professional Django / Full-Stack Developer and work on scalable real-world software systems. "
             "I specialize in advanced Django development, REST API architecture, scalable backend systems, PostgreSQL, and multi-tenant SaaS applications."
         )
-        profile.current_company = "Anjan lab company"
+        profile.current_company = "Anjan Lab Company"
         profile.current_role = "Django Developer"
         profile.location = "Kathmandu, Lalitpur, Nepal"
         profile.email = "deepakraj90054@email.com"
@@ -56,60 +57,53 @@ class Command(BaseCommand):
                 "slug": "backend-development",
                 "order": 1,
                 "skills": [
+                    ("Python", 95, "python"),
                     ("Django", 95, "django"),
                     ("Django REST Framework", 92, "api"),
-                    ("REST APIs", 90, "server"),
-                    ("Django ORM", 92, "database"),
+                    ("REST API Design", 92, "server"),
                     ("Authentication & Permissions", 90, "shield"),
-                    ("Custom User Models", 88, "users"),
-                    ("Class-Based & Function Views", 90, "code"),
-                    ("Middleware & Service-Layer", 85, "layers"),
+                    ("Background Tasks (Celery & Redis)", 88, "activity"),
+                    ("Service-Layer Architecture", 86, "layers"),
                 ],
             },
             {
-                "category": "Programming Languages",
-                "slug": "programming-languages",
+                "category": "Databases & Architecture",
+                "slug": "databases-architecture",
                 "order": 2,
                 "skills": [
-                    ("Python", 94, "python"),
-                    ("JavaScript", 85, "javascript"),
-                    ("HTML5", 95, "html"),
-                    ("CSS3", 90, "css"),
-                ],
-            },
-            {
-                "category": "Database & Multi-Tenancy",
-                "slug": "database-multi-tenancy",
-                "order": 3,
-                "skills": [
-                    ("PostgreSQL", 90, "database"),
+                    ("PostgreSQL", 92, "database"),
+                    ("Multi-Tenant Architecture", 90, "building"),
                     ("django-tenants", 92, "layers"),
-                    ("PostgreSQL Schemas", 90, "server"),
-                    ("Multi-Tenant Architecture", 88, "building"),
-                    ("Tenant Data Isolation", 90, "shield"),
-                    ("Query Optimization & Modeling", 86, "activity"),
+                    ("Schema Isolation", 90, "shield"),
+                    ("Database Modeling & ORM", 90, "database"),
+                    ("Query Optimization", 86, "activity"),
                 ],
             },
             {
                 "category": "Frontend Development",
                 "slug": "frontend-development",
-                "order": 4,
+                "order": 3,
                 "skills": [
+                    ("HTML5", 95, "html"),
+                    ("CSS3", 90, "css"),
+                    ("JavaScript", 85, "javascript"),
                     ("Bootstrap", 90, "layout"),
                     ("Responsive Web Design", 92, "smartphone"),
-                    ("Django Template Language", 94, "file-code"),
-                    ("Interactive UI Components", 85, "sparkles"),
+                    ("Django Templates", 94, "file-code"),
                 ],
             },
             {
-                "category": "Tools & Practices",
-                "slug": "tools-practices",
-                "order": 5,
+                "category": "Tools & Technologies",
+                "slug": "tools-technologies",
+                "order": 4,
                 "skills": [
-                    ("Git & GitHub", 90, "git"),
+                    ("Git & GitHub", 92, "git"),
+                    ("Docker", 85, "server"),
+                    ("Redis", 86, "database"),
+                    ("Celery", 86, "activity"),
                     ("Linux / Ubuntu / Terminal", 88, "terminal"),
-                    ("Clean Code & Modular Architecture", 90, "check-circle"),
-                    ("API Testing & Debugging", 88, "bug"),
+                    ("VS Code & AI Coding Tools", 90, "code"),
+                    ("Third-Party Integrations", 88, "sparkles"),
                 ],
             },
         ]
@@ -142,104 +136,151 @@ class Command(BaseCommand):
 
         self.stdout.write(self.style.SUCCESS("✓ Skills & Categories configured"))
 
-        # 3. Work Experience (Anjan lab company)
-        exp, _ = Experience.objects.get_or_create(
-            company="Anjan lab company",
-            role="Django Developer",
-            defaults={"location": "Kathmandu, Lalitpur, Nepal", "period": "Present (Active Role)", "is_current": True},
-        )
-        exp.location = "Kathmandu, Lalitpur, Nepal"
-        exp.period = "Current"
-        exp.is_current = True
-        exp.responsibilities = (
-            "Django backend development and business logic implementation\n"
-            "REST API development and integration using Django REST Framework\n"
-            "Database-driven application development with PostgreSQL\n"
-            "Authentication, role-based authorization, and permission enforcement\n"
-            "Appointment management and patient-related hospital modules\n"
-            "Hospital management workflows optimization and data integrity\n"
-            "API testing, debugging, and backend architecture maintenance\n"
-            "Production-oriented development and continuous code refactoring\n"
-            "Git and GitHub based collaborative branching and pull request workflow"
-        )
-        exp.technologies = "Python, Django, Django REST Framework, PostgreSQL, JavaScript, Git, Linux"
-        exp.order = 1
-        exp.save()
-        self.stdout.write(self.style.SUCCESS("✓ Work Experience configured"))
+        # 3. Work Experience
+        exp_data = [
+            {
+                "company": "Anjan Lab Company",
+                "role": "Django Developer",
+                "location": "Nepal",
+                "period": "August 2024 – Present",
+                "is_current": True,
+                "responsibilities": (
+                    "Lead the backend development of secure, database-driven healthcare web applications using Django and Django REST Framework.\n"
+                    "Architect and implement multi-tenant SaaS structures using PostgreSQL and django-tenants, ensuring strict schema isolation and data security across multiple hospital networks.\n"
+                    "Build and maintain complex REST APIs for appointment management, patient workflows, and centralized clinical modules.\n"
+                    "Optimize database queries and implement asynchronous task processing using Redis and Celery to improve application response times and performance.\n"
+                    "Collaborate with cross-functional teams to refactor legacy codebases and streamline deployment workflows using Docker containerization."
+                ),
+                "technologies": "Python, Django, Django REST Framework, PostgreSQL, django-tenants, Redis, Celery, Docker, Linux",
+                "order": 1,
+            },
+            {
+                "company": "Independent Web Developer",
+                "role": "Full-Stack Python Developer",
+                "location": "Nepal",
+                "period": "May 2024 – August 2024",
+                "is_current": False,
+                "responsibilities": (
+                    "Designed and developed end-to-end web solutions for local businesses, focusing on backend logic, database management, and responsive frontend UI.\n"
+                    "Created custom dashboards and data analytics tools, improving client operational efficiency."
+                ),
+                "technologies": "Python, Django, PostgreSQL, JavaScript, Bootstrap, HTML5, CSS3, Git",
+                "order": 2,
+            },
+        ]
 
-        # 4. Projects
+        for e_item in exp_data:
+            exp, _ = Experience.objects.get_or_create(
+                company=e_item["company"],
+                role=e_item["role"],
+                defaults={
+                    "location": e_item["location"],
+                    "period": e_item["period"],
+                    "is_current": e_item["is_current"],
+                    "order": e_item["order"],
+                },
+            )
+            exp.location = e_item["location"]
+            exp.period = e_item["period"]
+            exp.is_current = e_item["is_current"]
+            exp.responsibilities = e_item["responsibilities"]
+            exp.technologies = e_item["technologies"]
+            exp.order = e_item["order"]
+            exp.save()
+
+        self.stdout.write(self.style.SUCCESS("✓ Work Experiences configured"))
+
+        # 4. Education
+        edu, _ = Education.objects.get_or_create(
+            degree="Bachelor in Computer Application (BCA)",
+            institution="Prime College",
+            defaults={
+                "location": "Kathmandu, Nepal",
+                "period": "Running (3rd Year)",
+                "status": "Bachelor Running 3rd Year",
+                "order": 1,
+            },
+        )
+        edu.location = "Kathmandu, Nepal"
+        edu.period = "Running (3rd Year)"
+        edu.status = "Bachelor Running 3rd Year"
+        edu.description = (
+            "Undergraduate coursework in Computer Applications, Software Engineering, "
+            "Data Structures & Algorithms, Database Management Systems (PostgreSQL/SQL), and Web Application Architecture."
+        )
+        edu.order = 1
+        edu.save()
+        self.stdout.write(self.style.SUCCESS("✓ Education configured"))
+
+        # 5. Projects
         projects_data = [
             {
-                "title": "Anjan Hospital Management System",
+                "title": "Anjan Hospital Management Information System (HMIS)",
                 "slug": "anjan-hospital-management-system",
                 "project_type": "Healthcare / Hospital Management System",
                 "role": "Django Developer",
                 "badge": "Healthcare SaaS",
-                "summary": "Comprehensive hospital management and patient workflow platform with appointment scheduling, multi-tenant isolation, and secure REST APIs.",
+                "summary": "Comprehensive clinical workflow platform tailored for the healthcare sector with multi-tenant configurations and REST APIs.",
                 "description": (
-                    "Engineered a production-oriented healthcare and hospital management system designed to streamline clinical "
-                    "operations, medical appointments, and patient care workflows. Built with a robust Django and Django REST Framework backend "
-                    "interfacing with PostgreSQL, ensuring strict data security, role-based access control, and high-reliability data operations."
+                    "Architected a comprehensive clinical workflow platform tailored for the healthcare sector. "
+                    "Developed secure multi-tenant hospital configurations, allowing separate medical facilities to operate independently on a unified backend. "
+                    "Built dynamic REST API endpoints for patient registers, real-time appointment scheduling, and automated billing generation."
                 ),
                 "key_features": (
-                    "Patient record management and medical history tracking\n"
-                    "Automated doctor appointment scheduling and status updates\n"
-                    "Role-based authentication & permissions (Doctors, Staff, Patients, Admins)\n"
-                    "RESTful APIs for seamless client-side and external system communication\n"
-                    "Hospital operational workflows and departmental data handling\n"
-                    "Multi-tenant database architecture and PostgreSQL schema isolation\n"
-                    "Rigorous API testing, exception handling, and audit trails"
+                    "Architected comprehensive clinical workflow platform tailored for healthcare\n"
+                    "Secure multi-tenant hospital configurations with PostgreSQL schema isolation\n"
+                    "Unified backend allowing independent medical facilities to operate securely\n"
+                    "Dynamic REST API endpoints for patient registers and clinical logs\n"
+                    "Real-time appointment scheduling and automated status tracking\n"
+                    "Automated billing generation and hospital administration workflows"
                 ),
-                "technologies": "Python, Django, Django REST Framework, PostgreSQL, JavaScript, HTML, CSS",
+                "technologies": "Python, Django, Django REST Framework, PostgreSQL, django-tenants, JavaScript, HTML, CSS",
                 "order": 1,
             },
             {
-                "title": "Sadi Sewa — Wedding Service Booking Platform",
+                "title": "Sadi Sewa - Event & Wedding Booking Marketplace",
                 "slug": "sadi-sewa-wedding-booking-platform",
                 "project_type": "Wedding / Event Service Booking Platform",
                 "role": "Full-Stack Django Developer",
-                "badge": "Full-Stack Platform",
-                "summary": "Multi-vendor wedding and event booking marketplace featuring verified vendors, date-based reservations, cart management, and customer accounts.",
+                "badge": "Full-Stack Marketplace",
+                "summary": "Scalable multi-vendor booking platform connecting users with wedding and event service providers.",
                 "description": (
-                    "Developed a complete end-to-end event and wedding service booking platform connecting customers with vetted service vendors. "
-                    "Covers discovery, multi-service cart management, scheduling, vendor verification, and pricing models across event categories "
-                    "such as Wedding Decoration, Catering, Photography, Car Booking, and Event Planning."
+                    "Developed a scalable multi-vendor booking platform connecting users with wedding and event service providers. "
+                    "Implemented comprehensive vendor profiles, dynamic service packaging, booking management systems, and secure payment architecture. "
+                    "Designed an intuitive user interface utilizing Bootstrap and responsive HTML/CSS layouts."
                 ),
                 "key_features": (
-                    "Dual-role authentication for Customer and Vendor accounts\n"
-                    "Vendor profile management with verified credentials\n"
-                    "Multi-category service listings (Decoration, Catering, Photography, Car Booking)\n"
-                    "Dynamic pricing models, promotional discounts, and verified customer ratings\n"
-                    "Add to Cart system supporting multiple simultaneous service reservations\n"
-                    "Date-based service availability checking and booking calendar\n"
-                    "Customer dashboard with reservation status tracking and order history\n"
-                    "Responsive mobile-first user interface built with Bootstrap and modern CSS"
+                    "Scalable multi-vendor booking marketplace architecture\n"
+                    "Comprehensive vendor profiles and verification workflows\n"
+                    "Dynamic service packaging across decoration, catering, photography, and car rentals\n"
+                    "Cart management system supporting multiple service reservations\n"
+                    "Date-based service scheduling and booking availability check\n"
+                    "Secure payment architecture and customer transaction history\n"
+                    "Intuitive user interface utilizing Bootstrap and responsive layouts"
                 ),
-                "technologies": "Python, Django, HTML, CSS, JavaScript, Bootstrap, PostgreSQL",
+                "technologies": "Python, Django, PostgreSQL, HTML5, CSS3, JavaScript, Bootstrap",
                 "order": 2,
             },
             {
-                "title": "Hospital Management / Multi-Tenant SaaS Development",
-                "slug": "hospital-management-multi-tenant-saas",
-                "project_type": "Multi-Tenant SaaS Architecture",
-                "role": "Django Backend Developer",
-                "badge": "Multi-Tenant Architecture",
-                "summary": "Architectural implementation of multi-tenant SaaS architecture in Django using django-tenants and PostgreSQL schema-level isolation.",
+                "title": "E-Commerce Seller Center Dashboard",
+                "slug": "ecommerce-seller-center-dashboard",
+                "project_type": "E-Commerce / Merchant Management Dashboard",
+                "role": "Full-Stack Django Developer",
+                "badge": "E-Commerce Dashboard",
+                "summary": "Comprehensive seller dashboard featuring functionalities for seller registration, robust analytics, and earnings reports.",
                 "description": (
-                    "Deep exploration and production implementation of multi-tenancy in Django web applications. "
-                    "Utilized django-tenants to provide complete schema-level database isolation on PostgreSQL, allowing multiple independent "
-                    "hospitals or organizations to operate on a single shared codebase with guaranteed privacy and dedicated tenant subdomains."
+                    "Engineered a comprehensive seller dashboard featuring functionalities for seller registration, robust analytics, and earnings reports. "
+                    "Integrated real-time order tracking and status management using optimized PostgreSQL database relationships."
                 ),
                 "key_features": (
-                    "Multi-tenant data isolation using PostgreSQL schemas via django-tenants\n"
-                    "Implementation of TenantMixin and DomainMixin models\n"
-                    "Clear separation between shared applications and tenant-specific applications\n"
-                    "Subdomain-driven tenant routing and context switching\n"
-                    "Multi-tenant authentication and isolated user sessions\n"
-                    "Tenant-aware database operations, migrations, and schema management\n"
-                    "Scalable architecture designed for multi-client SaaS commercial deployment"
+                    "Comprehensive seller registration, onboarding, and store profile management\n"
+                    "Robust sales analytics and dynamic performance metrics dashboard\n"
+                    "Automated earnings reports, payouts tracking, and revenue analytics\n"
+                    "Real-time order tracking and lifecycle order status management\n"
+                    "Optimized PostgreSQL database relationships and indexed query pipelines\n"
+                    "Clean, modern responsive UI tailored for merchant workflow efficiency"
                 ),
-                "technologies": "Python, Django, django-tenants, PostgreSQL, SQL, Linux",
+                "technologies": "Python, Django, PostgreSQL, JavaScript, Bootstrap, HTML5, CSS3",
                 "order": 3,
             },
         ]
@@ -274,11 +315,11 @@ class Command(BaseCommand):
 
         self.stdout.write(self.style.SUCCESS("✓ Projects configured"))
 
-        # 5. Services
+        # 6. Services
         services_data = [
             (
                 "Django Backend & REST APIs",
-                "Architecting high-performance backend systems, secure RESTful APIs with Django REST Framework, robust authentication, and business logic pipelines.",
+                "Architecting high-performance backend systems, secure RESTful APIs with Django REST Framework, robust authentication, and background task pipelines.",
                 "server",
                 1,
             ),
@@ -295,7 +336,7 @@ class Command(BaseCommand):
                 3,
             ),
             (
-                "Database Modeling & PostgreSQL",
+                "Database Modeling & Optimization",
                 "Designing optimized database relationships, schema migrations, complex ORM queries, and indexing strategies for scalable data-driven apps.",
                 "database",
                 4,

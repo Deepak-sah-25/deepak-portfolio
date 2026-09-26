@@ -5,6 +5,7 @@ from .models import (
     Skill,
     Project,
     Experience,
+    Education,
     Service,
     ContactMessage,
 )
@@ -98,6 +99,13 @@ class ExperienceAdmin(admin.ModelAdmin):
     list_display = ("role", "company", "period", "is_current", "order")
     list_editable = ("order", "is_current")
     search_fields = ("role", "company", "technologies")
+
+
+@admin.register(Education)
+class EducationAdmin(admin.ModelAdmin):
+    list_display = ("degree", "institution", "location", "period", "status", "order")
+    list_editable = ("order",)
+    search_fields = ("degree", "institution", "description")
 
 
 @admin.register(Service)

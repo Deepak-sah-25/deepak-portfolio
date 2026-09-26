@@ -175,6 +175,31 @@ class Experience(models.Model):
         return [t.strip() for t in self.technologies.split(",") if t.strip()]
 
 
+class Education(models.Model):
+    degree = models.CharField(
+        max_length=150, default="Bachelor in Computer Application (BCA)"
+    )
+    institution = models.CharField(max_length=150, default="Prime College")
+    location = models.CharField(max_length=150, default="Kathmandu, Nepal")
+    period = models.CharField(max_length=100, default="Running (3rd Year)")
+    status = models.CharField(
+        max_length=100, default="Bachelor Running 3rd Year"
+    )
+    description = models.TextField(
+        blank=True,
+        help_text="Coursework or key academic focus (e.g. Data Structures, Web Development, DBMS)",
+    )
+    order = models.PositiveIntegerField(default=1)
+
+    class Meta:
+        ordering = ["order", "id"]
+        verbose_name = "Education"
+        verbose_name_plural = "Education"
+
+    def __str__(self):
+        return f"{self.degree} - {self.institution} ({self.period})"
+
+
 class Service(models.Model):
     title = models.CharField(max_length=150)
     description = models.TextField()

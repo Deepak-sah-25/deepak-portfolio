@@ -6,6 +6,7 @@ from portfolio.models import (
     Skill,
     Project,
     Experience,
+    Education,
     Service,
     ContactMessage,
 )
@@ -64,6 +65,14 @@ class PortfolioTests(TestCase):
             icon="server",
             order=1,
         )
+        self.education = Education.objects.create(
+            degree="Bachelor in Computer Application (BCA)",
+            institution="Prime College",
+            location="Kathmandu, Nepal",
+            period="Running (3rd Year)",
+            status="Bachelor Running 3rd Year",
+            order=1,
+        )
 
     def test_index_view_status_and_content(self):
         response = self.client.get(reverse("portfolio:index"))
@@ -72,6 +81,8 @@ class PortfolioTests(TestCase):
         self.assertContains(response, "Anjan Hospital Management System")
         self.assertContains(response, "Anjan lab company")
         self.assertContains(response, "Technologies I Master")
+        self.assertContains(response, "Prime College")
+        self.assertContains(response, "Bachelor in Computer Application (BCA)")
 
     def test_contact_submit_valid(self):
         data = {
@@ -115,6 +126,7 @@ class PortfolioTests(TestCase):
         self.assertEqual(str(self.skill), "Django (95%)")
         self.assertEqual(str(self.project), "Anjan Hospital Management System")
         self.assertEqual(str(self.experience), "Django Developer at Anjan lab company")
+        self.assertEqual(str(self.education), "Bachelor in Computer Application (BCA) - Prime College (Running (3rd Year))")
         self.assertEqual(str(self.service), "Django Backend & REST APIs")
         self.assertEqual(len(self.project.get_features_list()), 3)
         self.assertEqual(len(self.project.get_tech_list()), 4)

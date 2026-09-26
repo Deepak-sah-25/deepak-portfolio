@@ -6,79 +6,122 @@ endobj
 << /Type /Pages /Kids [3 0 R] /Count 1 >>
 endobj
 3 0 obj
-<< /Type /Page /Parent 2 0 R /Resources << /Font << /F1 4 0 R >> >> /MediaBox [0 0 595 842] /Contents 5 0 R >>
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 4 0 R /F2 5 0 R /F3 6 0 R >> >> /Contents 7 0 R >>
 endobj
 4 0 obj
-<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold /Encoding /WinAnsiEncoding >>
 endobj
 5 0 obj
-<< /Length 1375 >>
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica /Encoding /WinAnsiEncoding >>
+endobj
+6 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Oblique /Encoding /WinAnsiEncoding >>
+endobj
+7 0 obj
+<< /Length 9090 >>
 stream
-BT
-/F1 20 Tf
-50 800 Td
-(DEEPAK SAH KANU) Tj
-/F1 12 Tf
-0 -25 Td
-(Django Developer | Full-Stack Web Developer) Tj
-0 -20 Td
-(Email: deepakraj90054@email.com | Phone: +977 9829014425 | Kathmandu, Lalitpur, Nepal) Tj
-0 -20 Td
-(GitHub: https://github.com/Deepak-sah-25) Tj
-
-0 -35 Td
-/F1 14 Tf
-(PROFESSIONAL SUMMARY) Tj
-/F1 10 Tf
-0 -18 Td
-(Django Developer focused on building modern, scalable, secure, and user-friendly web applications.) Tj
-0 -15 Td
-(Specializes in Python, Django, DRF, PostgreSQL, and multi-tenant SaaS architecture.) Tj
-
-0 -30 Td
-/F1 14 Tf
-(EXPERIENCE) Tj
-/F1 11 Tf
-0 -18 Td
-(Django Developer - Anjan lab company (Kathmandu, Lalitpur, Nepal)) Tj
-/F1 10 Tf
-0 -15 Td
-(- Backend development and REST APIs using Django REST Framework) Tj
-0 -15 Td
-(- Database-driven applications with PostgreSQL and schema isolation) Tj
-0 -15 Td
-(- Appointment management, patient workflows, and hospital modules) Tj
-
-0 -30 Td
-/F1 14 Tf
-(CORE PROJECTS) Tj
-/F1 10 Tf
-0 -18 Td
-(1. Anjan Hospital Management System: Healthcare & clinical workflow platform) Tj
-0 -15 Td
-(2. Sadi Sewa: Wedding and event service multi-vendor booking marketplace) Tj
-0 -15 Td
-(3. Multi-Tenant SaaS Development: Schema isolation with django-tenants) Tj
-
-0 -30 Td
-/F1 14 Tf
-(TECHNICAL SKILLS) Tj
-/F1 10 Tf
-0 -18 Td
-(Python, Django, Django REST Framework, PostgreSQL, JavaScript, Bootstrap, Git, Linux) Tj
-ET
+BT /F1 18.0 Tf 0.07 0.10 0.16 rg 1 0 0 1 40.00 804.00 Tm (DEEPAK SAH KANU) Tj ET
+BT /F1 11.0 Tf 0.45 0.25 0.85 rg 1 0 0 1 40.00 787.00 Tm (Full-Stack Django Developer) Tj ET
+BT /F2 8.5 Tf 0.25 0.25 0.30 rg 1 0 0 1 40.00 772.00 Tm (Nepal  |  Phone: +977 9829014425  |  Email: deepakraj90054@email.com  |  GitHub: github.com/Deepak-sah-25) Tj ET
+q 0.45 0.25 0.85 RG 1.20 w 40.00 762.00 m 555.00 762.00 l S Q
+BT /F1 9.5 Tf 0.10 0.12 0.18 rg 1 0 0 1 40.00 747.00 Tm (PROFESSIONAL SUMMARY) Tj ET
+q 0.80 0.80 0.85 RG 0.50 w 40.00 744.00 m 555.00 744.00 l S Q
+BT /F2 8.5 Tf 0.18 0.18 0.20 rg 1 0 0 1 40.00 732.00 Tm (Results-driven Full-Stack Django Developer with over 2 years of experience in designing, building,) Tj ET
+BT /F2 8.5 Tf 0.18 0.18 0.20 rg 1 0 0 1 40.00 720.50 Tm (and deploying scalable web applications and RESTful APIs. Specializes in Python, Django REST Framework) Tj ET
+BT /F2 8.5 Tf 0.18 0.18 0.20 rg 1 0 0 1 40.00 709.00 Tm (\(DRF\), PostgreSQL, and multi-tenant SaaS architectures. Proven track record of developing robust) Tj ET
+BT /F2 8.5 Tf 0.18 0.18 0.20 rg 1 0 0 1 40.00 697.50 Tm (backend systems, optimizing database performance, and delivering secure, user-friendly solutions for) Tj ET
+BT /F2 8.5 Tf 0.18 0.18 0.20 rg 1 0 0 1 40.00 686.00 Tm (the healthcare and e-commerce sectors.) Tj ET
+BT /F1 9.5 Tf 0.10 0.12 0.18 rg 1 0 0 1 40.00 670.50 Tm (TECHNICAL SKILLS) Tj ET
+q 0.80 0.80 0.85 RG 0.50 w 40.00 667.50 m 555.00 667.50 l S Q
+BT /F1 8.5 Tf 0.12 0.12 0.18 rg 1 0 0 1 40.00 655.50 Tm (-  Backend Development:) Tj ET
+BT /F2 8.5 Tf 0.22 0.22 0.25 rg 1 0 0 1 145.30 655.50 Tm (Python, Django, Django REST Framework \(DRF\)) Tj ET
+BT /F1 8.5 Tf 0.12 0.12 0.18 rg 1 0 0 1 40.00 644.00 Tm (-  Frontend Development:) Tj ET
+BT /F2 8.5 Tf 0.22 0.22 0.25 rg 1 0 0 1 150.00 644.00 Tm (HTML5, CSS3, JavaScript, Bootstrap) Tj ET
+BT /F1 8.5 Tf 0.12 0.12 0.18 rg 1 0 0 1 40.00 632.50 Tm (-  Databases & Architecture:) Tj ET
+BT /F2 8.5 Tf 0.22 0.22 0.25 rg 1 0 0 1 168.80 632.50 Tm (PostgreSQL, Multi-Tenant Architecture \(django-tenants\), Schema Isolation) Tj ET
+BT /F1 8.5 Tf 0.12 0.12 0.18 rg 1 0 0 1 40.00 621.00 Tm (-  Tools & Technologies:) Tj ET
+BT /F2 8.5 Tf 0.22 0.22 0.25 rg 1 0 0 1 150.00 621.00 Tm (Git/GitHub, Docker, Redis, Celery, Linux, VS Code, AI Coding Tools) Tj ET
+BT /F1 8.5 Tf 0.12 0.12 0.18 rg 1 0 0 1 40.00 609.50 Tm (-  Core Competencies:) Tj ET
+BT /F2 8.5 Tf 0.22 0.22 0.25 rg 1 0 0 1 135.90 609.50 Tm (REST API Design, Background Task Processing, Database Modeling, Third-Party Integrations) Tj ET
+BT /F1 9.5 Tf 0.10 0.12 0.18 rg 1 0 0 1 40.00 594.00 Tm (PROFESSIONAL EXPERIENCE) Tj ET
+q 0.80 0.80 0.85 RG 0.50 w 40.00 591.00 m 555.00 591.00 l S Q
+BT /F1 9.5 Tf 0.08 0.10 0.15 rg 1 0 0 1 40.00 579.00 Tm (Anjan Lab Company) Tj ET
+BT /F2 9.0 Tf 0.35 0.35 0.40 rg 1 0 0 1 152.00 579.00 Tm (|  Nepal) Tj ET
+BT /F1 8.5 Tf 0.45 0.25 0.85 rg 1 0 0 1 450.00 579.00 Tm (August 2024 - Present) Tj ET
+BT /F3 9.0 Tf 0.20 0.20 0.25 rg 1 0 0 1 40.00 567.00 Tm (Django Developer) Tj ET
+BT /F1 8.5 Tf 0.45 0.25 0.85 rg 1 0 0 1 44.00 555.50 Tm (-) Tj ET
+BT /F2 8.5 Tf 0.18 0.18 0.20 rg 1 0 0 1 54.00 555.50 Tm (Lead the backend development of secure, database-driven healthcare web applications using Django) Tj ET
+BT /F2 8.5 Tf 0.18 0.18 0.20 rg 1 0 0 1 54.00 544.50 Tm (and Django REST Framework.) Tj ET
+BT /F1 8.5 Tf 0.45 0.25 0.85 rg 1 0 0 1 44.00 533.50 Tm (-) Tj ET
+BT /F2 8.5 Tf 0.18 0.18 0.20 rg 1 0 0 1 54.00 533.50 Tm (Architect and implement multi-tenant SaaS structures using PostgreSQL and django-tenants,) Tj ET
+BT /F2 8.5 Tf 0.18 0.18 0.20 rg 1 0 0 1 54.00 522.50 Tm (ensuring strict schema isolation and data security across multiple hospital networks.) Tj ET
+BT /F1 8.5 Tf 0.45 0.25 0.85 rg 1 0 0 1 44.00 511.50 Tm (-) Tj ET
+BT /F2 8.5 Tf 0.18 0.18 0.20 rg 1 0 0 1 54.00 511.50 Tm (Build and maintain complex REST APIs for appointment management, patient workflows, and) Tj ET
+BT /F2 8.5 Tf 0.18 0.18 0.20 rg 1 0 0 1 54.00 500.50 Tm (centralized clinical modules.) Tj ET
+BT /F1 8.5 Tf 0.45 0.25 0.85 rg 1 0 0 1 44.00 489.50 Tm (-) Tj ET
+BT /F2 8.5 Tf 0.18 0.18 0.20 rg 1 0 0 1 54.00 489.50 Tm (Optimize database queries and implement asynchronous task processing using Redis and Celery to) Tj ET
+BT /F2 8.5 Tf 0.18 0.18 0.20 rg 1 0 0 1 54.00 478.50 Tm (improve application response times and performance.) Tj ET
+BT /F1 8.5 Tf 0.45 0.25 0.85 rg 1 0 0 1 44.00 467.50 Tm (-) Tj ET
+BT /F2 8.5 Tf 0.18 0.18 0.20 rg 1 0 0 1 54.00 467.50 Tm (Collaborate with cross-functional teams to refactor legacy codebases and streamline deployment) Tj ET
+BT /F2 8.5 Tf 0.18 0.18 0.20 rg 1 0 0 1 54.00 456.50 Tm (workflows using Docker containerization.) Tj ET
+BT /F1 9.5 Tf 0.08 0.10 0.15 rg 1 0 0 1 40.00 442.50 Tm (Independent Web Developer) Tj ET
+BT /F2 9.0 Tf 0.35 0.35 0.40 rg 1 0 0 1 185.00 442.50 Tm (|  Nepal) Tj ET
+BT /F1 8.5 Tf 0.45 0.25 0.85 rg 1 0 0 1 445.00 442.50 Tm (May 2024 - August 2024) Tj ET
+BT /F3 9.0 Tf 0.20 0.20 0.25 rg 1 0 0 1 40.00 430.50 Tm (Full-Stack Python Developer) Tj ET
+BT /F1 8.5 Tf 0.45 0.25 0.85 rg 1 0 0 1 44.00 419.00 Tm (-) Tj ET
+BT /F2 8.5 Tf 0.18 0.18 0.20 rg 1 0 0 1 54.00 419.00 Tm (Designed and developed end-to-end web solutions for local businesses, focusing on backend logic,) Tj ET
+BT /F2 8.5 Tf 0.18 0.18 0.20 rg 1 0 0 1 54.00 408.00 Tm (database management, and responsive frontend UI.) Tj ET
+BT /F1 8.5 Tf 0.45 0.25 0.85 rg 1 0 0 1 44.00 397.00 Tm (-) Tj ET
+BT /F2 8.5 Tf 0.18 0.18 0.20 rg 1 0 0 1 54.00 397.00 Tm (Created custom dashboards and data analytics tools, improving client operational efficiency.) Tj ET
+BT /F1 9.5 Tf 0.10 0.12 0.18 rg 1 0 0 1 40.00 382.00 Tm (KEY PROJECTS) Tj ET
+q 0.80 0.80 0.85 RG 0.50 w 40.00 379.00 m 555.00 379.00 l S Q
+BT /F1 9.0 Tf 0.08 0.10 0.15 rg 1 0 0 1 40.00 367.00 Tm (Anjan Hospital Management Information System \(HMIS\)) Tj ET
+BT /F3 8.0 Tf 0.40 0.40 0.45 rg 1 0 0 1 445.00 367.00 Tm (Healthcare SaaS) Tj ET
+BT /F1 8.5 Tf 0.45 0.25 0.85 rg 1 0 0 1 44.00 356.00 Tm (-) Tj ET
+BT /F2 8.5 Tf 0.18 0.18 0.20 rg 1 0 0 1 54.00 356.00 Tm (Architected a comprehensive clinical workflow platform tailored for the healthcare sector.) Tj ET
+BT /F1 8.5 Tf 0.45 0.25 0.85 rg 1 0 0 1 44.00 345.00 Tm (-) Tj ET
+BT /F2 8.5 Tf 0.18 0.18 0.20 rg 1 0 0 1 54.00 345.00 Tm (Developed secure multi-tenant hospital configurations, allowing separate medical facilities to) Tj ET
+BT /F2 8.5 Tf 0.18 0.18 0.20 rg 1 0 0 1 54.00 334.00 Tm (operate independently on a unified backend.) Tj ET
+BT /F1 8.5 Tf 0.45 0.25 0.85 rg 1 0 0 1 44.00 323.00 Tm (-) Tj ET
+BT /F2 8.5 Tf 0.18 0.18 0.20 rg 1 0 0 1 54.00 323.00 Tm (Built dynamic REST API endpoints for patient registers, real-time appointment scheduling, and) Tj ET
+BT /F2 8.5 Tf 0.18 0.18 0.20 rg 1 0 0 1 54.00 312.00 Tm (automated billing generation.) Tj ET
+BT /F1 9.0 Tf 0.08 0.10 0.15 rg 1 0 0 1 40.00 298.00 Tm (Sadi Sewa - Event & Wedding Booking Marketplace) Tj ET
+BT /F3 8.0 Tf 0.40 0.40 0.45 rg 1 0 0 1 445.00 298.00 Tm (Full-Stack Marketplace) Tj ET
+BT /F1 8.5 Tf 0.45 0.25 0.85 rg 1 0 0 1 44.00 287.00 Tm (-) Tj ET
+BT /F2 8.5 Tf 0.18 0.18 0.20 rg 1 0 0 1 54.00 287.00 Tm (Developed a scalable multi-vendor booking platform connecting users with wedding and event) Tj ET
+BT /F2 8.5 Tf 0.18 0.18 0.20 rg 1 0 0 1 54.00 276.00 Tm (service providers.) Tj ET
+BT /F1 8.5 Tf 0.45 0.25 0.85 rg 1 0 0 1 44.00 265.00 Tm (-) Tj ET
+BT /F2 8.5 Tf 0.18 0.18 0.20 rg 1 0 0 1 54.00 265.00 Tm (Implemented comprehensive vendor profiles, dynamic service packaging, booking management systems,) Tj ET
+BT /F2 8.5 Tf 0.18 0.18 0.20 rg 1 0 0 1 54.00 254.00 Tm (and secure payment architecture.) Tj ET
+BT /F1 8.5 Tf 0.45 0.25 0.85 rg 1 0 0 1 44.00 243.00 Tm (-) Tj ET
+BT /F2 8.5 Tf 0.18 0.18 0.20 rg 1 0 0 1 54.00 243.00 Tm (Designed an intuitive user interface utilizing Bootstrap and responsive HTML/CSS layouts.) Tj ET
+BT /F1 9.0 Tf 0.08 0.10 0.15 rg 1 0 0 1 40.00 229.00 Tm (E-Commerce Seller Center Dashboard) Tj ET
+BT /F3 8.0 Tf 0.40 0.40 0.45 rg 1 0 0 1 445.00 229.00 Tm (Analytics & Orders) Tj ET
+BT /F1 8.5 Tf 0.45 0.25 0.85 rg 1 0 0 1 44.00 218.00 Tm (-) Tj ET
+BT /F2 8.5 Tf 0.18 0.18 0.20 rg 1 0 0 1 54.00 218.00 Tm (Engineered a comprehensive seller dashboard featuring functionalities for seller registration,) Tj ET
+BT /F2 8.5 Tf 0.18 0.18 0.20 rg 1 0 0 1 54.00 207.00 Tm (robust analytics, and earnings reports.) Tj ET
+BT /F1 8.5 Tf 0.45 0.25 0.85 rg 1 0 0 1 44.00 196.00 Tm (-) Tj ET
+BT /F2 8.5 Tf 0.18 0.18 0.20 rg 1 0 0 1 54.00 196.00 Tm (Integrated real-time order tracking and status management using optimized PostgreSQL database) Tj ET
+BT /F2 8.5 Tf 0.18 0.18 0.20 rg 1 0 0 1 54.00 185.00 Tm (relationships.) Tj ET
+BT /F1 9.5 Tf 0.10 0.12 0.18 rg 1 0 0 1 40.00 170.00 Tm (EDUCATION) Tj ET
+q 0.80 0.80 0.85 RG 0.50 w 40.00 167.00 m 555.00 167.00 l S Q
+BT /F1 9.0 Tf 0.08 0.10 0.15 rg 1 0 0 1 40.00 155.00 Tm (Bachelor in Computer Application \(BCA\)) Tj ET
+BT /F1 8.5 Tf 0.45 0.25 0.85 rg 1 0 0 1 445.00 155.00 Tm (Running \(3rd Year\)) Tj ET
+BT /F2 8.5 Tf 0.25 0.25 0.30 rg 1 0 0 1 40.00 143.50 Tm (Prime College  |  Kathmandu, Nepal) Tj ET
 endstream
 endobj
 xref
-0 6
+0 8
 0000000000 65535 f 
 0000000009 00000 n 
 0000000058 00000 n 
 0000000115 00000 n 
-0000000241 00000 n 
-0000000311 00000 n 
+0000000261 00000 n 
+0000000363 00000 n 
+0000000460 00000 n 
+0000000565 00000 n 
 trailer
-<< /Size 6 /Root 1 0 R >>
+<< /Size 8 /Root 1 0 R >>
 startxref
-1738
+9707
 %%EOF

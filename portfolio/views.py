@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404
 from django.http import JsonResponse
 from django.views.decorators.http import require_POST
-from .models import Profile, SkillCategory, Skill, Project, Experience, Service, ContactMessage
+from .models import Profile, SkillCategory, Skill, Project, Experience, Education, Service, ContactMessage
 from .forms import ContactForm
 
 
@@ -14,6 +14,7 @@ def index_view(request):
     featured_skills = Skill.objects.filter(is_featured=True)[:8]
     projects = Project.objects.all()
     experiences = Experience.objects.all()
+    educations = Education.objects.all()
     services = Service.objects.all()
     contact_form = ContactForm()
 
@@ -23,6 +24,7 @@ def index_view(request):
         "featured_skills": featured_skills,
         "projects": projects,
         "experiences": experiences,
+        "educations": educations,
         "services": services,
         "contact_form": contact_form,
     }
