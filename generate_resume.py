@@ -5,20 +5,49 @@ def build_deepak_resume():
     
     margin_x = 40
     content_width = 515
-    y = 804
     
-    # ------------------ HEADER ------------------
+    # Register Deepak's photo
+    pdf.add_image_resource("DeepakPhoto", "static/images/deepak.jpg")
+    
+    # Photo Box in Top-Right
+    box_w = 60
+    box_h = 72
+    box_x = margin_x + content_width - box_w
+    box_y = 736  # top of box will be 736 + 72 = 808
+    
+    # Scale image to fill box width nicely and show face/shoulders
+    img_w = 66
+    img_h = img_w * (1024 / 575)  # ~117 pt
+    img_x = box_x - (img_w - box_w) / 2
+    # Place top of image slightly above top of box so hair and face are centered
+    img_y = (box_y + box_h) - img_h + 12
+    
+    # Draw photo with clipping and glowing violet border
+    pdf.draw_image(
+        "DeepakPhoto",
+        x=img_x,
+        y=img_y,
+        w=img_w,
+        h=img_h,
+        clip_box=(box_x, box_y, box_w, box_h),
+        border_color=(0.45, 0.25, 0.85),
+        border_width=1.2,
+    )
+
+    # ------------------ HEADER (Left Column) ------------------
+    y = 806
     pdf.add_text(margin_x, y, "DEEPAK SAH KANU", font="F1", size=18, r=0.07, g=0.1, b=0.16)
-    y -= 17
+    y -= 18
     
     pdf.add_text(margin_x, y, "Full-Stack Django Developer", font="F1", size=11, r=0.45, g=0.25, b=0.85)
     y -= 15
     
-    contact_str = "Nepal  |  Phone: +977 9829014425  |  Email: deepakraj90054@email.com  |  GitHub: github.com/Deepak-sah-25"
-    pdf.add_text(margin_x, y, contact_str, font="F2", size=8.5, r=0.25, g=0.25, b=0.3)
-    y -= 10
+    pdf.add_text(margin_x, y, "Nepal  |  Phone: +977 9829014425  |  Email: deepakraj90054@email.com", font="F2", size=8.5, r=0.25, g=0.25, b=0.3)
+    y -= 12
+    pdf.add_text(margin_x, y, "GitHub: github.com/Deepak-sah-25", font="F2", size=8.5, r=0.25, g=0.25, b=0.3)
     
-    # Top Accent Line
+    # Position accent line cleanly beneath both text and photo box
+    y = 726
     pdf.add_line(margin_x, y, margin_x + content_width, y, r=0.45, g=0.25, b=0.85, width=1.2)
     y -= 15
     
@@ -51,10 +80,10 @@ def build_deepak_resume():
         ("Tools & Technologies", "Git/GitHub, Docker, Redis, Celery, Linux, VS Code, AI Coding Tools"),
         ("Core Competencies", "REST API Design, Background Task Processing, Database Modeling, Third-Party Integrations")
     ]
+    desc_x = margin_x + 128
     for cat, desc in skills:
         pdf.add_text(margin_x, y, "-  " + cat + ":", font="F1", size=8.5, r=0.12, g=0.12, b=0.18)
-        offset = len(cat) * 4.7 + 16
-        pdf.add_text(margin_x + offset, y, desc, font="F2", size=8.5, r=0.22, g=0.22, b=0.25)
+        pdf.add_text(desc_x, y, desc, font="F2", size=8.5, r=0.22, g=0.22, b=0.25)
         y -= 11.5
     y -= 4
 
