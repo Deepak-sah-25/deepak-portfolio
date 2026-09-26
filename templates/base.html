@@ -1,0 +1,127 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ profile.name }} | {{ profile.extended_title }}</title>
+    
+    <!-- Meta SEO -->
+    <meta name="description" content="{{ profile.name }} - {{ profile.extended_title }}. {{ profile.hero_tagline }}">
+    <meta name="keywords" content="Deepak Sah Kanu, Django Developer, Full-Stack Developer, Python, Django, DRF, PostgreSQL, Multi-Tenant SaaS, Nepal">
+    <meta name="author" content="{{ profile.name }}">
+
+    <!-- Open Graph / Social Media -->
+    <meta property="og:title" content="{{ profile.name }} | {{ profile.short_title }}">
+    <meta property="og:description" content="{{ profile.hero_tagline }}">
+    <meta property="og:type" content="website">
+    {% if profile.profile_image %}
+    <meta property="og:image" content="{{ profile.profile_image.url }}">
+    {% endif %}
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+
+    <!-- Ambient Cosmic Glows -->
+    <div class="cosmic-bg">
+        <div class="cosmic-blob cosmic-blob-1"></div>
+        <div class="cosmic-blob cosmic-blob-2"></div>
+        <div class="cosmic-blob cosmic-blob-3"></div>
+    </div>
+    <div class="grid-overlay"></div>
+
+    <!-- Animated Preloader -->
+    <div id="preloader">
+        <div class="loader-terminal">
+            <div class="loader-code">
+                <span style="color: #a855f7;">&lt;/&gt;</span>
+                <span>deepak_sah.init()</span>
+            </div>
+            <div class="loader-bar">
+                <div class="loader-progress"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- App Wrapper -->
+    <div class="app-wrapper">
+        <!-- Site Header / Navbar -->
+        <header class="site-header">
+            <div class="container-custom">
+                <div class="navbar-inner">
+                    <a href="#hero" class="brand-logo">
+                        <span class="brand-icon">&lt;/&gt;</span>
+                        <span>{{ profile.name }}</span>
+                    </a>
+
+                    <nav>
+                        <ul class="nav-links">
+                            <li><a href="#hero" class="nav-link active">Home</a></li>
+                            <li><a href="#about" class="nav-link">About</a></li>
+                            <li><a href="#skills" class="nav-link">Skills</a></li>
+                            <li><a href="#projects" class="nav-link">Projects</a></li>
+                            <li><a href="#experience" class="nav-link">Experience</a></li>
+                            <li><a href="#services" class="nav-link">Services</a></li>
+                            <li><a href="#contact" class="nav-link">Contact</a></li>
+                        </ul>
+                    </nav>
+
+                    <a href="#contact" class="nav-cta">
+                        <span>Let's Talk</span>
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="7" y1="17" x2="17" y2="7"></line>
+                            <polyline points="7 7 17 7 17 17"></polyline>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main>
+            {% block content %}
+            {% endblock %}
+        </main>
+
+        <!-- Site Footer -->
+        <footer class="site-footer">
+            <div class="container-custom">
+                <div class="footer-inner">
+                    <div class="footer-copy">
+                        &copy; 2026 <strong>{{ profile.name }}</strong>. All rights reserved.
+                    </div>
+                    <div class="footer-made-with">
+                        <span>Engineered with Python &amp; Django</span>
+                        <span style="color: #ec4899;">♥</span>
+                        <span>• Nepal</span>
+                    </div>
+                </div>
+            </div>
+        </footer>
+
+        <!-- Back to Top Button -->
+        <button id="backToTop" class="back-to-top" aria-label="Back to top">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="18 15 12 9 6 15"></polyline>
+            </svg>
+        </button>
+
+        <!-- Global Toast Notification -->
+        <div id="toastNotice" class="toast-notice" role="alert">
+            <div class="toast-icon">✓</div>
+            <div id="toastText" class="toast-text">Message sent successfully!</div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="{% static 'js/main.js' %}"></script>
+    {% block extra_js %}{% endblock %}
+</body>
+</html>
