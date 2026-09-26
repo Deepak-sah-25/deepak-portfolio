@@ -38,7 +38,7 @@ class Command(BaseCommand):
         )
         profile.current_company = "Anjan lab company"
         profile.current_role = "Django Developer"
-        profile.location = "Nepal"
+        profile.location = "Kathmandu, Lalitpur, Nepal"
         profile.email = "deepakraj90054@email.com"
         profile.phone = "+977 9829014425"
         profile.whatsapp_number = "+977 9829014425"
@@ -146,9 +146,9 @@ class Command(BaseCommand):
         exp, _ = Experience.objects.get_or_create(
             company="Anjan lab company",
             role="Django Developer",
-            defaults={"location": "Nepal", "period": "Present (Active Role)", "is_current": True},
+            defaults={"location": "Kathmandu, Lalitpur, Nepal", "period": "Present (Active Role)", "is_current": True},
         )
-        exp.location = "Nepal"
+        exp.location = "Kathmandu, Lalitpur, Nepal"
         exp.period = "Current"
         exp.is_current = True
         exp.responsibilities = (

@@ -37,7 +37,7 @@ class Profile(models.Model):
     )
     current_company = models.CharField(max_length=150, default="Anjan lab company")
     current_role = models.CharField(max_length=150, default="Django Developer")
-    location = models.CharField(max_length=100, default="Nepal")
+    location = models.CharField(max_length=150, default="Kathmandu, Lalitpur, Nepal")
     email = models.CharField(max_length=150, default="deepakraj90054@email.com", blank=True)
     phone = models.CharField(max_length=50, blank=True, default="+977 9829014425")
     whatsapp_number = models.CharField(max_length=50, blank=True, default="+977 9829014425")
@@ -147,7 +147,7 @@ class Project(models.Model):
 class Experience(models.Model):
     company = models.CharField(max_length=150)
     role = models.CharField(max_length=150)
-    location = models.CharField(max_length=100, default="Nepal")
+    location = models.CharField(max_length=150, default="Kathmandu, Lalitpur, Nepal")
     period = models.CharField(max_length=100, default="Present")
     is_current = models.BooleanField(default=True)
     responsibilities = models.TextField(
