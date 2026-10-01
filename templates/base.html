@@ -143,23 +143,79 @@
         <!-- Site Footer -->
         <footer class="site-footer">
             <div class="container-custom">
-                <div class="footer-inner">
-                    <div class="footer-copy">
+                <!-- Footer Top Grid -->
+                <div class="footer-top-grid">
+                    <!-- Brand Column -->
+                    <div class="footer-brand-col">
+                        <a href="#hero" class="footer-brand-logo">
+                            <span class="brand-icon">&lt;/&gt;</span>
+                            <span>{{ profile.name }}</span>
+                        </a>
+                        <p class="footer-brand-bio">
+                            Full-Stack Django Developer specializing in scalable backend architectures, REST APIs, PostgreSQL, and multi-tenant SaaS systems.
+                        </p>
+                        <div class="footer-location-tag">
+                            <span>📍</span>
+                            <span>Kathmandu, Lalitpur, Nepal</span>
+                        </div>
+                    </div>
+
+                    <!-- Quick Navigation Links -->
+                    <div class="footer-links-col">
+                        <div class="footer-col-title">Navigation</div>
+                        <ul class="footer-nav-list">
+                            <li><a href="#hero">Home</a></li>
+                            <li><a href="#about">About Me</a></li>
+                            <li><a href="#skills">Skills</a></li>
+                            <li><a href="#projects">Projects</a></li>
+                            <li><a href="#experience">Experience</a></li>
+                            <li><a href="#services">Services</a></li>
+                            <li><a href="#contact">Contact</a></li>
+                        </ul>
+                    </div>
+
+                    <!-- Connect & Channels -->
+                    <div class="footer-connect-col">
+                        <div class="footer-col-title">Let's Connect</div>
+                        <div class="footer-social-chips">
+                            {% if profile.whatsapp_url %}
+                            <a href="{{ profile.whatsapp_url }}" target="_blank" rel="noopener noreferrer" class="social-chip wa-chip" title="Chat on WhatsApp">
+                                <span class="chip-dot-online"></span>
+                                <span>WhatsApp (+977 9829014425)</span>
+                            </a>
+                            {% endif %}
+                            <a href="mailto:{{ profile.email }}" class="social-chip mail-chip" title="Send Email">
+                                <span>✉</span>
+                                <span>{{ profile.email }}</span>
+                            </a>
+                            {% if profile.github_url %}
+                            <a href="{{ profile.github_url }}" target="_blank" rel="noopener noreferrer" class="social-chip github-chip" title="GitHub Profile">
+                                <span>🐙</span>
+                                <span>github.com/Deepak-sah-25</span>
+                            </a>
+                            {% endif %}
+                        </div>
+
+                        <div class="footer-resume-cta">
+                            <a href="{% url 'portfolio:download_resume' %}" class="btn-secondary-glass footer-cv-btn" title="Download ATS Resume PDF">
+                                <span>📄 Download ATS Resume (PDF)</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Footer Divider -->
+                <div class="footer-divider"></div>
+
+                <!-- Footer Bottom Bar -->
+                <div class="footer-bottom-bar">
+                    <div class="footer-copyright">
                         &copy; 2026 <strong>{{ profile.name }}</strong>. All rights reserved.
                     </div>
-                    <div style="display: flex; align-items: center; gap: 16px;">
-                        {% if profile.github_url %}
-                        <a href="{{ profile.github_url }}" target="_blank" rel="noopener" style="color: var(--text-secondary); text-decoration: none; font-size: 0.88rem;" title="GitHub">GitHub ↗</a>
-                        {% endif %}
-                        {% if profile.whatsapp_url %}
-                        <a href="{{ profile.whatsapp_url }}" target="_blank" rel="noopener" style="color: #4ade80; text-decoration: none; font-size: 0.88rem;" title="WhatsApp">WhatsApp ↗</a>
-                        {% endif %}
-                        <a href="mailto:{{ profile.email }}" style="color: var(--text-secondary); text-decoration: none; font-size: 0.88rem;">Email ↗</a>
-                    </div>
-                    <div class="footer-made-with">
-                        <span>Engineered with Python &amp; Django</span>
-                        <span style="color: #ec4899;">♥</span>
-                        <span>• Kathmandu, Lalitpur, Nepal</span>
+                    <div class="footer-tech-stack">
+                        <span>Built with Python &amp; Django</span>
+                        <span class="footer-heart">♥</span>
+                        <span>PostgreSQL &amp; WhiteNoise</span>
                     </div>
                 </div>
             </div>
