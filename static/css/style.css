@@ -1586,15 +1586,122 @@ body {
   }
 }
 
+/* Mobile Hamburger Button */
+.mobile-toggle {
+  display: none;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 8px;
+  padding: 8px;
+  cursor: pointer;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  width: 42px;
+  height: 40px;
+  transition: var(--transition);
+}
+
+.mobile-toggle:hover {
+  background: rgba(139, 92, 246, 0.15);
+  border-color: var(--accent-purple);
+}
+
+.hamburger-bar {
+  display: block;
+  width: 20px;
+  height: 2px;
+  background: #ffffff;
+  border-radius: 2px;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.mobile-toggle.active .hamburger-bar:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+
+.mobile-toggle.active .hamburger-bar:nth-child(2) {
+  opacity: 0;
+}
+
+.mobile-toggle.active .hamburger-bar:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+}
+
+/* Mobile Nav Drawer */
+.mobile-nav-drawer {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  background: rgba(10, 13, 20, 0.98);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border-bottom: 1px solid rgba(139, 92, 246, 0.3);
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.85);
+  padding: 20px 24px;
+  flex-direction: column;
+  gap: 16px;
+  z-index: 999;
+}
+
+.mobile-nav-drawer.open {
+  display: flex;
+}
+
+.mobile-nav-links {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.mobile-nav-link {
+  color: var(--text-secondary);
+  text-decoration: none;
+  font-size: 1rem;
+  font-weight: 600;
+  padding: 10px 14px;
+  border-radius: 8px;
+  transition: var(--transition);
+  display: block;
+}
+
+.mobile-nav-link:hover, .mobile-nav-link.active {
+  color: #ffffff;
+  background: rgba(139, 92, 246, 0.18);
+}
+
+.mobile-nav-footer {
+  padding-top: 12px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.mobile-nav-cta-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: 12px;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #7c3aed, #6366f1);
+  color: #ffffff;
+  font-weight: 700;
+  text-decoration: none;
+  box-shadow: 0 4px 18px rgba(124, 58, 237, 0.4);
+}
+
 @media (max-width: 768px) {
   .nav-links, .nav-cta {
-    display: none;
+    display: none !important;
   }
   .mobile-toggle {
-    display: block;
+    display: flex !important;
   }
   .hero-title {
-    font-size: 2.5rem;
+    font-size: 2.4rem;
   }
   .projects-grid {
     grid-template-columns: 1fr;
@@ -1603,12 +1710,12 @@ body {
     grid-template-columns: 1fr;
   }
   .hero-portrait-frame.round-shape {
-    width: 280px;
-    height: 280px;
+    width: 270px;
+    height: 270px;
   }
   .hero-circle-backdrop {
-    width: 290px;
-    height: 290px;
+    width: 280px;
+    height: 280px;
   }
   .hero-laptop-silhouette {
     width: 220px;
@@ -1630,6 +1737,66 @@ body {
   .footer-inner {
     flex-direction: column;
     text-align: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .container-custom {
+    padding: 0 16px;
+  }
+  .hero-title {
+    font-size: 2.05rem;
+    line-height: 1.2;
+  }
+  .hero-role-title {
+    font-size: 1.15rem;
+  }
+  .hero-actions {
+    flex-direction: column;
+    width: 100%;
+  }
+  .hero-actions a {
+    width: 100%;
+    justify-content: center;
+  }
+  .hero-portrait-frame.round-shape {
+    width: 225px;
+    height: 225px;
+  }
+  .hero-circle-backdrop {
+    width: 235px;
+    height: 235px;
+  }
+  .hero-laptop-silhouette {
+    width: 190px;
+  }
+  .section-title {
+    font-size: 1.85rem;
+  }
+  .skills-grid {
+    grid-template-columns: 1fr;
+  }
+  .skill-card {
+    padding: 16px 18px;
+  }
+  .project-body {
+    padding: 20px 18px;
+  }
+  .project-card-footer {
+    flex-direction: column;
+  }
+  .project-card-footer .project-link-btn {
+    width: 100%;
+    justify-content: center;
+  }
+  .modal-dialog-custom {
+    padding: 24px 18px;
+    border-radius: 16px;
+    margin: 12px;
+  }
+  .modal-close-btn {
+    top: 14px;
+    right: 14px;
   }
 }
 

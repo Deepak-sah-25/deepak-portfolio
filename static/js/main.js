@@ -422,4 +422,48 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     }
   }
+
+  // 12. Mobile Navigation Drawer Interactivity
+  const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+  const mobileNavDrawer = document.getElementById('mobileNavDrawer');
+  const mobileNavLinks = document.querySelectorAll('.mobile-nav-link, .mobile-nav-cta-btn');
+
+  if (mobileMenuBtn && mobileNavDrawer) {
+    function toggleMobileNav(e) {
+      if (e) e.stopPropagation();
+      const isOpen = mobileNavDrawer.classList.toggle('open');
+      mobileMenuBtn.classList.toggle('active', isOpen);
+      mobileMenuBtn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+      mobileNavDrawer.setAttribute('aria-hidden', isOpen ? 'false' : 'true');
+    }
+
+    function closeMobileNav() {
+      mobileNavDrawer.classList.remove('open');
+      mobileMenuBtn.classList.remove('active');
+      mobileMenuBtn.setAttribute('aria-expanded', 'false');
+      mobileNavDrawer.setAttribute('aria-hidden', 'true');
+    }
+
+    mobileMenuBtn.addEventListener('click', toggleMobileNav);
+
+    mobileNavLinks.forEach(link => {
+      link.addEventListener('click', () => {
+        closeMobileNav();
+      });
+    });
+
+    document.addEventListener('click', (e) => {
+      if (!mobileNavDrawer.contains(e.target) && !mobileMenuBtn.contains(e.target)) {
+        closeMobileNav();
+      }
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && mobileNavDrawer.classList.contains('open')) {
+        closeMobileNav();
+        mobileMenuBtn.focus();
+      }
+    });
+  }
 });
+
