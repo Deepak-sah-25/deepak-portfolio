@@ -1,3 +1,4 @@
+import time
 from django.shortcuts import render, get_object_or_404
 from django.http import JsonResponse
 from django.views.decorators.http import require_POST
@@ -33,9 +34,22 @@ def index_view(request):
 
 @require_POST
 def contact_submit_view(request):
+    # Cooldown flood protection: minimum 5 seconds between submissions
+    last_submit = request.session.get("last_contact_submit_time", 0)
+    current_time = time.time()
+    if current_time - last_submit < 5:
+        return JsonResponse(
+            {
+                "success": False,
+                "message": "Please wait a few seconds before submitting another message.",
+            },
+            status=429,
+        )
+
     form = ContactForm(request.POST)
     if form.is_valid():
         contact_message = form.save()
+        request.session["last_contact_submit_time"] = current_time
         return JsonResponse(
             {
                 "success": True,

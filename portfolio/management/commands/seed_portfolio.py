@@ -1,3 +1,5 @@
+import shutil
+from django.conf import settings
 from django.core.management.base import BaseCommand
 from portfolio.models import (
     Profile,
@@ -13,8 +15,37 @@ from portfolio.models import (
 class Command(BaseCommand):
     help = "Seed database with Deepak Sah Kanu's exact portfolio profile and project data."
 
+    def _sync_media_assets(self):
+        """Ensure media directories exist and sync essential logos/profile images from static."""
+        media_profile_dir = settings.MEDIA_ROOT / "profile"
+        media_projects_dir = settings.MEDIA_ROOT / "projects"
+        media_profile_dir.mkdir(parents=True, exist_ok=True)
+        media_projects_dir.mkdir(parents=True, exist_ok=True)
+
+        # Profile image sync
+        static_profile_img = settings.BASE_DIR / "static" / "images" / "deepak.jpg"
+        media_profile_img = media_profile_dir / "deepak.jpg"
+        if static_profile_img.exists():
+            shutil.copy2(static_profile_img, media_profile_img)
+
+        # Project logos sync
+        project_logos = [
+            "starnews_logo.png",
+            "kinaun_brand.svg",
+            "batomechanic_logo.png",
+            "cdc_logo.png",
+        ]
+        for logo in project_logos:
+            static_logo = settings.BASE_DIR / "static" / "images" / logo
+            media_logo = media_projects_dir / logo
+            if static_logo.exists():
+                shutil.copy2(static_logo, media_logo)
+
     def handle(self, *args, **options):
         self.stdout.write(self.style.NOTICE("Seeding Deepak Sah Kanu's portfolio data..."))
+
+        # Synchronize media assets from static assets for fresh deployments
+        self._sync_media_assets()
 
         # 1. Profile
         profile, created = Profile.objects.get_or_create(id=1)
@@ -61,6 +92,7 @@ class Command(BaseCommand):
                     ("Django", 95, "django"),
                     ("Django REST Framework", 92, "api"),
                     ("REST API Design", 92, "server"),
+                    ("Django ORM", 92, "database"),
                     ("Authentication & Permissions", 90, "shield"),
                     ("Background Tasks (Celery & Redis)", 88, "activity"),
                     ("Service-Layer Architecture", 86, "layers"),
@@ -103,10 +135,15 @@ class Command(BaseCommand):
                     ("Celery", 86, "activity"),
                     ("Linux / Ubuntu / Terminal", 88, "terminal"),
                     ("VS Code & AI Coding Tools", 90, "code"),
+                    ("Clean Code & Modular Architecture", 90, "check-circle"),
                     ("Third-Party Integrations", 88, "sparkles"),
                 ],
             },
         ]
+
+        # Remove obsolete categories
+        valid_slugs = [c["slug"] for c in skills_data]
+        SkillCategory.objects.exclude(slug__in=valid_slugs).delete()
 
         for cat_info in skills_data:
             category, _ = SkillCategory.objects.get_or_create(
@@ -116,6 +153,10 @@ class Command(BaseCommand):
             category.name = cat_info["category"]
             category.order = cat_info["order"]
             category.save()
+
+            # Remove obsolete skills in this category
+            valid_skill_names = [s[0] for s in cat_info["skills"]]
+            category.skills.exclude(name__in=valid_skill_names).delete()
 
             for idx, (skill_name, proficiency, icon) in enumerate(cat_info["skills"]):
                 skill, _ = Skill.objects.get_or_create(
@@ -134,7 +175,7 @@ class Command(BaseCommand):
                 skill.is_featured = idx < 4
                 skill.save()
 
-        self.stdout.write(self.style.SUCCESS("✓ Skills & Categories configured"))
+        self.stdout.write(self.style.SUCCESS("✓ Skills & Categories configured (clean & deduplicated)"))
 
         # 3. Work Experience
         exp_data = [
@@ -215,75 +256,114 @@ class Command(BaseCommand):
         # 5. Projects
         projects_data = [
             {
-                "title": "Anjan Hospital Management Information System (HMIS)",
-                "slug": "anjan-hospital-management-system",
-                "project_type": "Healthcare / Hospital Management System",
-                "role": "Django Developer",
-                "badge": "Healthcare SaaS",
-                "summary": "Comprehensive clinical workflow platform tailored for the healthcare sector with multi-tenant configurations and REST APIs.",
+                "title": "Star News TV — Live Digital News & Media Portal",
+                "slug": "star-news-tv-digital-media-portal",
+                "project_type": "Live Digital News & Media Platform",
+                "role": "Full-Stack Web Developer",
+                "badge": "Live Production 🟢",
+                "live_url": "https://www.starnewstv.com.np/",
+                "summary": "High-traffic digital news and multimedia broadcasting platform in Nepal featuring breaking stories, category filtering, search, and responsive reader view.",
                 "description": (
-                    "Architected a comprehensive clinical workflow platform tailored for the healthcare sector. "
-                    "Developed secure multi-tenant hospital configurations, allowing separate medical facilities to operate independently on a unified backend. "
-                    "Built dynamic REST API endpoints for patient registers, real-time appointment scheduling, and automated billing generation."
+                    "Engineered and deployed a production-grade digital news and media broadcasting portal for Star News TV (https://www.starnewstv.com.np/). "
+                    "Built with a high-performance backend supporting real-time news publishing, multimedia asset delivery, article categorization "
+                    "(Politics, Entertainment, Sports, Society, Music), editorial author attribution, full-text search, and optimized database queries."
                 ),
                 "key_features": (
-                    "Architected comprehensive clinical workflow platform tailored for healthcare\n"
-                    "Secure multi-tenant hospital configurations with PostgreSQL schema isolation\n"
-                    "Unified backend allowing independent medical facilities to operate securely\n"
-                    "Dynamic REST API endpoints for patient registers and clinical logs\n"
-                    "Real-time appointment scheduling and automated status tracking\n"
-                    "Automated billing generation and hospital administration workflows"
+                    "Live production digital news portal serving active readers across Nepal\n"
+                    "Dynamic breaking news banner & top-story multimedia carousel\n"
+                    "Multi-category article filtering (Politics, Entertainment, Sports, Society, Music)\n"
+                    "Keyword search with date-range filters and editorial author attribution\n"
+                    "Optimized database schema and media asset delivery pipeline\n"
+                    "SEO-optimized OpenGraph metadata, Twitter cards, and structured schema markup\n"
+                    "100% responsive mobile-first UI with bilingual support"
                 ),
-                "technologies": "Python, Django, Django REST Framework, PostgreSQL, django-tenants, JavaScript, HTML, CSS",
+                "technologies": "Python, Django, REST APIs, PostgreSQL, JavaScript, Next.js, Tailwind CSS",
+                "image": "projects/starnews_logo.png",
                 "order": 1,
             },
             {
-                "title": "Sadi Sewa - Event & Wedding Booking Marketplace",
-                "slug": "sadi-sewa-wedding-booking-platform",
-                "project_type": "Wedding / Event Service Booking Platform",
-                "role": "Full-Stack Django Developer",
-                "badge": "Full-Stack Marketplace",
-                "summary": "Scalable multi-vendor booking platform connecting users with wedding and event service providers.",
+                "title": "Kinaun — Multi-Vendor E-Commerce Platform",
+                "slug": "kinaun-ecommerce-marketplace",
+                "project_type": "Multi-Vendor E-Commerce Platform",
+                "role": "Full-Stack Developer (Collaborative Team Project)",
+                "badge": "Live Production 🟢",
+                "live_url": "https://www.kinaun.com/",
+                "summary": "Scalable multi-vendor online shopping marketplace and seller portal in Nepal built collaboratively with engineering team.",
                 "description": (
-                    "Developed a scalable multi-vendor booking platform connecting users with wedding and event service providers. "
-                    "Implemented comprehensive vendor profiles, dynamic service packaging, booking management systems, and secure payment architecture. "
-                    "Designed an intuitive user interface utilizing Bootstrap and responsive HTML/CSS layouts."
+                    "Collaborated with an agile engineering team to architect, build, and deploy Kinaun (https://www.kinaun.com/), "
+                    "an active multi-vendor e-commerce marketplace in Nepal. Engineered seller onboarding and merchant administration dashboards, "
+                    "catalog and inventory management, real-time customer order lifecycle tracking, checkout flows, and high-performance PostgreSQL relational schemas."
                 ),
                 "key_features": (
-                    "Scalable multi-vendor booking marketplace architecture\n"
-                    "Comprehensive vendor profiles and verification workflows\n"
-                    "Dynamic service packaging across decoration, catering, photography, and car rentals\n"
-                    "Cart management system supporting multiple service reservations\n"
-                    "Date-based service scheduling and booking availability check\n"
-                    "Secure payment architecture and customer transaction history\n"
-                    "Intuitive user interface utilizing Bootstrap and responsive layouts"
+                    "Live production multi-vendor e-commerce platform in Nepal (kinaun.com)\n"
+                    "Developed collaboratively in an agile cross-functional engineering team\n"
+                    "Comprehensive seller center dashboard for store onboarding, analytics, and earnings reports\n"
+                    "Product catalog management with category hierarchy and dynamic attribute filters\n"
+                    "Real-time order lifecycle tracking, inventory sync, and customer checkout flows\n"
+                    "Optimized PostgreSQL relational database architecture for high-volume transactions\n"
+                    "Responsive mobile-first user interface tailored for seamless shopping and merchant management"
                 ),
-                "technologies": "Python, Django, PostgreSQL, HTML5, CSS3, JavaScript, Bootstrap",
+                "technologies": "Python, Django, PostgreSQL, REST APIs, JavaScript, Bootstrap, HTML5, CSS3",
+                "image": "projects/kinaun_brand.svg",
                 "order": 2,
             },
             {
-                "title": "E-Commerce Seller Center Dashboard",
-                "slug": "ecommerce-seller-center-dashboard",
-                "project_type": "E-Commerce / Merchant Management Dashboard",
-                "role": "Full-Stack Django Developer",
-                "badge": "E-Commerce Dashboard",
-                "summary": "Comprehensive seller dashboard featuring functionalities for seller registration, robust analytics, and earnings reports.",
+                "title": "Bato Mechanic — Roadside Vehicle Assistance & Mechanic Platform",
+                "slug": "bato-mechanic-roadside-assistance",
+                "project_type": "On-Demand Automobile Assistance Platform",
+                "role": "Full-Stack Web & API Developer",
+                "badge": "Live Production 🟢",
+                "live_url": "https://batomechanic.com/",
+                "summary": "On-demand roadside assistance and vehicle mechanic booking platform in Nepal with emergency dispatch, repair catalogs, and REST APIs.",
                 "description": (
-                    "Engineered a comprehensive seller dashboard featuring functionalities for seller registration, robust analytics, and earnings reports. "
-                    "Integrated real-time order tracking and status management using optimized PostgreSQL database relationships."
+                    "Engineered and deployed Bato Mechanic (https://batomechanic.com/), Nepal's premier digital platform connecting motorists "
+                    "with certified mechanics during on-road vehicle breakdowns. Built robust backend RESTful APIs for real-time service requests, "
+                    "emergency roadside dispatch, multi-category automobile repair catalog (bikes & cars), and multilingual content delivery."
                 ),
                 "key_features": (
-                    "Comprehensive seller registration, onboarding, and store profile management\n"
-                    "Robust sales analytics and dynamic performance metrics dashboard\n"
-                    "Automated earnings reports, payouts tracking, and revenue analytics\n"
-                    "Real-time order tracking and lifecycle order status management\n"
-                    "Optimized PostgreSQL database relationships and indexed query pipelines\n"
-                    "Clean, modern responsive UI tailored for merchant workflow efficiency"
+                    "Live production roadside assistance platform operating across Nepal (batomechanic.com)\n"
+                    "Real-time emergency mechanic dispatch and breakdown assistance request pipeline\n"
+                    "Categorized vehicle maintenance and repair service catalog for bikes and cars\n"
+                    "High-performance REST API backend supporting modern web and mobile clients\n"
+                    "Bilingual localization system with dynamic English and Nepali language switching\n"
+                    "Responsive modern UI architecture optimized for emergency mobile browser access"
                 ),
-                "technologies": "Python, Django, PostgreSQL, JavaScript, Bootstrap, HTML5, CSS3",
+                "technologies": "Python, Django, REST APIs, PostgreSQL, React, JavaScript, Tailwind CSS",
+                "image": "projects/batomechanic_logo.png",
                 "order": 3,
             },
+            {
+                "title": "CDC Cinemas — Movie Ticketing & Theater Management Portal",
+                "slug": "cdc-cinemas-ticketing-portal",
+                "project_type": "Entertainment & Movie Ticketing Platform",
+                "role": "Full-Stack Web & Backend Developer",
+                "badge": "Live Production 🟢",
+                "live_url": "https://www.cdcnepal.com.np/",
+                "summary": "Live cinema ticketing and theater management web portal in Kathmandu, Nepal featuring real-time showtimes, seat reservation, and payment processing.",
+                "description": (
+                    "Engineered and deployed the production web platform for CDC Cinemas (https://www.cdcnepal.com.np/), "
+                    "a premier multiplex cinema in Kathmandu. Built dynamic seat selection systems, real-time showtime scheduling, "
+                    "now showing & upcoming movie catalog management, automated ticket pricing matrices, and secure online payment workflows."
+                ),
+                "key_features": (
+                    "Live production movie ticket booking portal operating in Kathmandu, Nepal (cdcnepal.com.np)\n"
+                    "Dynamic now-showing and upcoming movie catalog with multimedia trailers and synopses\n"
+                    "Interactive real-time seat reservation layout and showtime scheduling matrix\n"
+                    "Tiered ticket rates, promotional discounts, and automated billing generation\n"
+                    "Optimized database queries and media asset caching for high-traffic movie release days\n"
+                    "Responsive modern UI architecture optimized for desktop and mobile moviegoers"
+                ),
+                "technologies": "Python, Django, PostgreSQL, REST APIs, JavaScript, Bulma CSS, HTML5",
+                "image": "projects/cdc_logo.png",
+                "order": 4,
+            },
         ]
+
+        # Clean up any obsolete/duplicate projects
+        current_slugs = [p["slug"] for p in projects_data]
+        deleted_count, _ = Project.objects.exclude(slug__in=current_slugs).delete()
+        if deleted_count:
+            self.stdout.write(self.style.WARNING(f"Cleaned up {deleted_count} obsolete/duplicate projects"))
 
         for p_data in projects_data:
             project, _ = Project.objects.get_or_create(
@@ -297,6 +377,7 @@ class Command(BaseCommand):
                     "description": p_data["description"],
                     "key_features": p_data["key_features"],
                     "technologies": p_data["technologies"],
+                    "live_url": p_data.get("live_url"),
                     "order": p_data["order"],
                     "is_featured": True,
                 },
@@ -309,6 +390,9 @@ class Command(BaseCommand):
             project.description = p_data["description"]
             project.key_features = p_data["key_features"]
             project.technologies = p_data["technologies"]
+            project.live_url = p_data.get("live_url")
+            if p_data.get("image"):
+                project.image = p_data["image"]
             project.order = p_data["order"]
             project.is_featured = True
             project.save()

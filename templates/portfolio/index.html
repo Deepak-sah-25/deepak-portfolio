@@ -70,7 +70,7 @@
                         <span class="tech-pill">📜 JavaScript</span>
                         <span class="tech-pill">🎨 Bootstrap</span>
                         <span class="tech-pill">🏢 django-tenants</span>
-                        <span class="tech-pill">🐙 Git</span>
+                        <span class="tech-pill">🐙 Git &amp; GitHub</span>
                     </div>
                 </div>
             </div>
@@ -265,30 +265,50 @@
 
         <div class="projects-grid reveal-init">
             {% for project in projects %}
-            <div class="glass-card project-card">
-                <!-- Visual Header -->
-                <div class="project-img-wrap">
+            <div class="glass-card project-card" {% if project.live_url %}data-live-url="{{ project.live_url }}"{% else %}data-modal-id="{{ project.pk }}"{% endif %}>
+                <!-- Visual Header / Image Wrap -->
+                {% if project.live_url %}
+                <a href="{{ project.live_url }}" target="_blank" rel="noopener noreferrer" class="project-img-wrap" title="Open {{ project.title }} live website in a new tab">
+                {% else %}
+                <div class="project-img-wrap open-project-modal" data-project-id="{{ project.pk }}" title="View {{ project.title }} details">
+                {% endif %}
                     {% if project.image %}
-                        <img src="{{ project.image.url }}" alt="{{ project.title }}">
+                        <img src="{{ project.image.url }}" alt="{{ project.title }}" class="project-card-image">
                     {% else %}
-                        <!-- Clean Code Graphic Placeholder -->
+                        <!-- Graphic Placeholder -->
                         <div style="text-align: center; padding: 20px;">
                             <div style="font-size: 2.5rem; margin-bottom: 8px;">
-                                {% if 'hospital' in project.title|lower %}🏥
-                                {% elif 'sadi' in project.title|lower or 'wedding' in project.title|lower %}💍
+                                {% if 'star' in project.title|lower or 'news' in project.title|lower %}📰
+                                {% elif 'cinema' in project.title|lower or 'cdc' in project.title|lower %}🎬
+                                {% elif 'bato' in project.title|lower or 'mechanic' in project.title|lower %}🚗
+                                {% elif 'commerce' in project.title|lower or 'seller' in project.title|lower or 'kinaun' in project.title|lower %}🛍️
                                 {% else %}🏢{% endif %}
                             </div>
-                            <span style="font-family: var(--font-mono); font-size: 0.8rem; color: var(--accent-purple);">&lt;project_{{ forloop.counter }}.py /&gt;</span>
+                            <span style="font-family: var(--font-mono); font-size: 0.76rem; color: var(--accent-purple); letter-spacing: 0.06em; text-transform: uppercase;">{{ project.badge }}</span>
                         </div>
                     {% endif %}
                     <span class="project-badge-tag">{{ project.badge }}</span>
                     <span class="project-index">0{{ forloop.counter }}</span>
+                {% if project.live_url %}
+                </a>
+                {% else %}
                 </div>
+                {% endif %}
 
                 <!-- Body -->
                 <div class="project-body">
                     <div class="project-type-subtitle">{{ project.project_type }}</div>
-                    <h3 class="project-title">{{ project.title }}</h3>
+                    <h3 class="project-title">
+                        {% if project.live_url %}
+                        <a href="{{ project.live_url }}" target="_blank" rel="noopener noreferrer" class="project-title-link" title="Open {{ project.title }} in new tab">
+                            {{ project.title }} <span style="font-size: 0.85em; color: var(--accent-purple);">↗</span>
+                        </a>
+                        {% else %}
+                        <span class="open-project-modal" data-project-id="{{ project.pk }}">
+                            {{ project.title }}
+                        </span>
+                        {% endif %}
+                    </h3>
                     <p class="project-summary">{{ project.summary }}</p>
 
                     <div class="project-tech-tags">
@@ -297,14 +317,19 @@
                         {% endfor %}
                     </div>
 
-                    <div class="project-card-footer">
+                    <div class="project-card-footer" style="display: flex; gap: 8px; flex-wrap: wrap;">
                         <button class="project-link-btn open-project-modal" data-project-id="{{ project.pk }}">
-                            <span>View Project Details</span>
+                            <span>View Details</span>
                             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                                 <line x1="5" y1="12" x2="19" y2="12"></line>
                                 <polyline points="12 5 19 12 12 19"></polyline>
                             </svg>
                         </button>
+                        {% if project.live_url %}
+                        <a href="{{ project.live_url }}" target="_blank" rel="noopener noreferrer" class="project-link-btn" style="background: rgba(139, 92, 246, 0.22); border: 1px solid rgba(139, 92, 246, 0.5); color: #c4b5fd; font-weight: 600;">
+                            <span>Visit Live ↗</span>
+                        </a>
+                        {% endif %}
                     </div>
                 </div>
             </div>
@@ -560,6 +585,9 @@
 
                 <form id="contactForm" method="POST" action="{% url 'portfolio:contact_submit' %}">
                     {% csrf_token %}
+                    <div style="display:none;" aria-hidden="true">
+                        {{ contact_form.hp_company }}
+                    </div>
                     
                     <div class="form-group-custom">
                         <label class="form-label-custom" for="{{ contact_form.name.id_for_label }}">Your Name *</label>
@@ -613,6 +641,8 @@
             Technologies &amp; Architecture
         </h4>
         <div id="modalTechTags" style="display: flex; flex-wrap: wrap; gap: 8px;"></div>
+        
+        <div id="modalLinks" style="margin-top: 24px; display: flex; gap: 12px; align-items: center;"></div>
     </div>
 </div>
 {% endblock %}

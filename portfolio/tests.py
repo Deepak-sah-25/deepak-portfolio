@@ -158,3 +158,40 @@ class PortfolioTests(TestCase):
         self.assertContains(response, "canonical")
         self.assertContains(response, "og:site_name")
         self.assertContains(response, "twitter:card")
+
+    def test_contact_honeypot_spam_protection(self):
+        # Automated bot filling honeypot should be blocked
+        data = {
+            "name": "Bot Spammer",
+            "email": "bot@spam.com",
+            "subject": "Spam Offer",
+            "message": "Spam text message buy now",
+            "hp_company": "Bot Trap Triggered",
+        }
+        response = self.client.post(reverse("portfolio:contact_submit"), data)
+        self.assertEqual(response.status_code, 400)
+        json_data = response.json()
+        self.assertFalse(json_data["success"])
+        self.assertIn("Spam submission detected.", json_data["errors"][0])
+
+    def test_contact_rate_limit_flood_protection(self):
+        # First submission succeeds
+        data = {
+            "name": "Legit User",
+            "email": "legit@example.com",
+            "subject": "Hello",
+            "message": "First message",
+            "hp_company": "",
+        }
+        res1 = self.client.post(reverse("portfolio:contact_submit"), data)
+        self.assertEqual(res1.status_code, 200)
+
+        # Second submission immediately from same session is rate-limited (429)
+        res2 = self.client.post(reverse("portfolio:contact_submit"), data)
+        self.assertEqual(res2.status_code, 429)
+        self.assertFalse(res2.json()["success"])
+
+    def test_resume_aliases(self):
+        self.assertEqual(self.client.get("/download-resume/").status_code, 200)
+        self.assertEqual(self.client.get("/resume/").status_code, 200)
+

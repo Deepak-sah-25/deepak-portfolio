@@ -8,4 +8,6 @@ urlpatterns = [
     path("contact/submit/", views.contact_submit_view, name="contact_submit"),
     path("api/projects/<int:pk>/", views.project_detail_api, name="project_detail_api"),
     path("resume/download/", views.download_resume_view, name="download_resume"),
+    path("download-resume/", views.download_resume_view),
+    path("resume/", views.download_resume_view),
 ]

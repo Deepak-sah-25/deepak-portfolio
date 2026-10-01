@@ -74,6 +74,7 @@ document.addEventListener('DOMContentLoaded', () => {
   if (typewriterElement) {
     const phrases = [
       'Django Developer',
+      'Django Backend Developer',
       'Full-Stack Web Developer',
       'Backend Systems Specialist',
       'Multi-Tenant SaaS Architect',
@@ -237,6 +238,21 @@ document.addEventListener('DOMContentLoaded', () => {
           });
         }
 
+        // Render live link
+        const modalLinks = document.getElementById('modalLinks');
+        if (modalLinks) {
+          modalLinks.innerHTML = '';
+          if (data.live_url) {
+            const a = document.createElement('a');
+            a.href = data.live_url;
+            a.target = '_blank';
+            a.rel = 'noopener noreferrer';
+            a.className = 'btn-primary-glow';
+            a.innerHTML = '<span>Visit Live Website ↗</span>';
+            modalLinks.appendChild(a);
+          }
+        }
+
         modalOverlay.classList.add('active');
         document.body.style.overflow = 'hidden';
       })
@@ -253,8 +269,28 @@ document.addEventListener('DOMContentLoaded', () => {
   openModalButtons.forEach(btn => {
     btn.addEventListener('click', (e) => {
       e.preventDefault();
+      e.stopPropagation();
       const projId = btn.getAttribute('data-project-id');
       if (projId) openProjectModal(projId);
+    });
+  });
+
+  // Whole project card click: open live URL directly in new tab, or open modal if no live URL
+  const projectCards = document.querySelectorAll('.project-card');
+  projectCards.forEach(card => {
+    card.addEventListener('click', (e) => {
+      if (e.target.closest('button') || e.target.closest('a')) {
+        return;
+      }
+      const liveUrl = card.getAttribute('data-live-url');
+      if (liveUrl) {
+        window.open(liveUrl, '_blank', 'noopener,noreferrer');
+      } else {
+        const modalId = card.getAttribute('data-modal-id');
+        if (modalId) {
+          openProjectModal(modalId);
+        }
+      }
     });
   });
 
@@ -329,5 +365,61 @@ document.addEventListener('DOMContentLoaded', () => {
         }
       });
     });
+  }
+
+  // 11. Sticky Floating Contact Speed Dial Logic
+  const floatingWrapper = document.getElementById('floatingContactWrapper');
+  const floatingTrigger = document.getElementById('floatingContactTrigger');
+  const floatingMenu = document.getElementById('floatingContactMenu');
+  const floatingContactAnchor = document.getElementById('floatingContactAnchor');
+
+  if (floatingTrigger && floatingWrapper) {
+    function toggleFloatingMenu() {
+      const isActive = floatingWrapper.classList.toggle('active');
+      floatingTrigger.setAttribute('aria-expanded', isActive ? 'true' : 'false');
+      if (floatingMenu) {
+        floatingMenu.setAttribute('aria-hidden', isActive ? 'false' : 'true');
+      }
+    }
+
+    function closeFloatingMenu() {
+      floatingWrapper.classList.remove('active');
+      floatingTrigger.setAttribute('aria-expanded', 'false');
+      if (floatingMenu) {
+        floatingMenu.setAttribute('aria-hidden', 'true');
+      }
+    }
+
+    floatingTrigger.addEventListener('click', (e) => {
+      e.stopPropagation();
+      toggleFloatingMenu();
+    });
+
+    // Close on click outside
+    document.addEventListener('click', (e) => {
+      if (!floatingWrapper.contains(e.target)) {
+        closeFloatingMenu();
+      }
+    });
+
+    // Close on Escape key
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && floatingWrapper.classList.contains('active')) {
+        closeFloatingMenu();
+        floatingTrigger.focus();
+      }
+    });
+
+    // Smooth scroll for Contact anchor inside menu
+    if (floatingContactAnchor) {
+      floatingContactAnchor.addEventListener('click', (e) => {
+        closeFloatingMenu();
+        const contactSection = document.getElementById('contact');
+        if (contactSection) {
+          e.preventDefault();
+          contactSection.scrollIntoView({ behavior: 'smooth' });
+        }
+      });
+    }
   }
 });

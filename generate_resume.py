@@ -134,52 +134,65 @@ def build_deepak_resume():
     # ------------------ 4. KEY PROJECTS ------------------
     section_header("Key Projects")
     
-    # 4.1 Anjan HMIS
-    pdf.add_text(margin_x, y, "Anjan Hospital Management Information System (HMIS)", font="F1", size=9, r=0.08, g=0.1, b=0.15)
-    pdf.add_text(margin_x + content_width - 110, y, "Healthcare SaaS", font="F3", size=8, r=0.4, g=0.4, b=0.45)
-    y -= 11
+    # 4.1 Star News TV (Live Production)
+    pdf.add_text(margin_x, y, "Star News TV - Digital News & Media Portal", font="F1", size=9, r=0.08, g=0.1, b=0.15)
+    pdf.add_text(margin_x + content_width - 130, y, "Live: starnewstv.com.np", font="F1", size=8, r=0.45, g=0.25, b=0.85)
+    y -= 10.5
+    p0_bullets = [
+        "Engineered and deployed a live production digital news portal delivering breaking news & multimedia coverage across Nepal.",
+        "Implemented high-concurrency content delivery, category filtering, full-text search, and automated publishing workflows."
+    ]
+    for b in p0_bullets:
+        pdf.add_text(margin_x + 4, y, "-", font="F1", size=8.5, r=0.45, g=0.25, b=0.85)
+        for line in wrap_text(b, 98):
+            pdf.add_text(margin_x + 14, y, line, font="F2", size=8.5, r=0.18, g=0.18, b=0.2)
+            y -= 10.5
+    y -= 2.5
+
+    # 4.2 Kinaun Multi-Vendor E-Commerce (Live Production - Team Project)
+    pdf.add_text(margin_x, y, "Kinaun - Multi-Vendor E-Commerce Platform", font="F1", size=9, r=0.08, g=0.1, b=0.15)
+    pdf.add_text(margin_x + content_width - 130, y, "Live: kinaun.com", font="F1", size=8, r=0.45, g=0.25, b=0.85)
+    y -= 10.5
     p1_bullets = [
-        "Architected a comprehensive clinical workflow platform tailored for the healthcare sector.",
-        "Developed secure multi-tenant hospital configurations, allowing separate medical facilities to operate independently on a unified backend.",
-        "Built dynamic REST API endpoints for patient registers, real-time appointment scheduling, and automated billing generation."
+        "Collaborated with cross-functional engineering team to build and launch an active multi-vendor shopping marketplace in Nepal.",
+        "Engineered merchant seller center, product catalogs, order tracking workflows, and PostgreSQL relational schemas."
     ]
     for b in p1_bullets:
         pdf.add_text(margin_x + 4, y, "-", font="F1", size=8.5, r=0.45, g=0.25, b=0.85)
         for line in wrap_text(b, 98):
             pdf.add_text(margin_x + 14, y, line, font="F2", size=8.5, r=0.18, g=0.18, b=0.2)
-            y -= 11
-    y -= 3
+            y -= 10.5
+    y -= 2.5
 
-    # 4.2 Sadi Sewa
-    pdf.add_text(margin_x, y, "Sadi Sewa - Event & Wedding Booking Marketplace", font="F1", size=9, r=0.08, g=0.1, b=0.15)
-    pdf.add_text(margin_x + content_width - 110, y, "Full-Stack Marketplace", font="F3", size=8, r=0.4, g=0.4, b=0.45)
-    y -= 11
+    # 4.3 Bato Mechanic (Live Production)
+    pdf.add_text(margin_x, y, "Bato Mechanic - Roadside Assistance Platform", font="F1", size=9, r=0.08, g=0.1, b=0.15)
+    pdf.add_text(margin_x + content_width - 130, y, "Live: batomechanic.com", font="F1", size=8, r=0.45, g=0.25, b=0.85)
+    y -= 10.5
     p2_bullets = [
-        "Developed a scalable multi-vendor booking platform connecting users with wedding and event service providers.",
-        "Implemented comprehensive vendor profiles, dynamic service packaging, booking management systems, and secure payment architecture.",
-        "Designed an intuitive user interface utilizing Bootstrap and responsive HTML/CSS layouts."
+        "Engineered on-demand roadside assistance platform connecting stranded motorists with nearby certified mechanics.",
+        "Built REST API endpoints for breakdown service requests, vehicle repair catalogs, and bilingual content workflows."
     ]
     for b in p2_bullets:
         pdf.add_text(margin_x + 4, y, "-", font="F1", size=8.5, r=0.45, g=0.25, b=0.85)
         for line in wrap_text(b, 98):
             pdf.add_text(margin_x + 14, y, line, font="F2", size=8.5, r=0.18, g=0.18, b=0.2)
-            y -= 11
-    y -= 3
+            y -= 10.5
+    y -= 2.5
 
-    # 4.3 E-Commerce
-    pdf.add_text(margin_x, y, "E-Commerce Seller Center Dashboard", font="F1", size=9, r=0.08, g=0.1, b=0.15)
-    pdf.add_text(margin_x + content_width - 110, y, "Analytics & Orders", font="F3", size=8, r=0.4, g=0.4, b=0.45)
-    y -= 11
+    # 4.4 CDC Cinemas (Live Production)
+    pdf.add_text(margin_x, y, "CDC Cinemas - Movie Ticketing & Theater Portal", font="F1", size=9, r=0.08, g=0.1, b=0.15)
+    pdf.add_text(margin_x + content_width - 130, y, "Live: cdcnepal.com.np", font="F1", size=8, r=0.45, g=0.25, b=0.85)
+    y -= 10.5
     p3_bullets = [
-        "Engineered a comprehensive seller dashboard featuring functionalities for seller registration, robust analytics, and earnings reports.",
-        "Integrated real-time order tracking and status management using optimized PostgreSQL database relationships."
+        "Engineered multiplex cinema ticketing web platform with interactive seat selection & showtime scheduling.",
+        "Built movie catalog management, dynamic ticket pricing tiers, and secure online transaction workflows."
     ]
     for b in p3_bullets:
         pdf.add_text(margin_x + 4, y, "-", font="F1", size=8.5, r=0.45, g=0.25, b=0.85)
         for line in wrap_text(b, 98):
             pdf.add_text(margin_x + 14, y, line, font="F2", size=8.5, r=0.18, g=0.18, b=0.2)
-            y -= 11
-    y -= 4
+            y -= 10.5
+    y -= 3.5
 
     # ------------------ 5. EDUCATION ------------------
     section_header("Education")
