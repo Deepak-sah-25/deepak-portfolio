@@ -1,5 +1,6 @@
 from django.test import TestCase, Client
 from django.urls import reverse
+from django.core.cache import cache
 from portfolio.models import (
     Profile,
     SkillCategory,
@@ -14,6 +15,7 @@ from portfolio.models import (
 
 class PortfolioTests(TestCase):
     def setUp(self):
+        cache.clear()
         self.client = Client()
         self.profile = Profile.objects.create(
             name="Deepak Sah Kanu",

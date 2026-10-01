@@ -2,8 +2,19 @@ import time
 from django.shortcuts import render, get_object_or_404
 from django.http import JsonResponse
 from django.views.decorators.http import require_POST
+from django.core.cache import cache
 from .models import Profile, SkillCategory, Skill, Project, Experience, Education, Service, ContactMessage
 from .forms import ContactForm
+
+
+def get_client_ip(request):
+    """Safely determine client IP through proxy / load balancer (Render, Railway, Cloudflare)."""
+    x_forwarded_for = request.META.get("HTTP_X_FORWARDED_FOR")
+    if x_forwarded_for:
+        ip = x_forwarded_for.split(",")[0].strip()
+    else:
+        ip = request.META.get("REMOTE_ADDR")
+    return ip or "127.0.0.1"
 
 
 def index_view(request):
@@ -34,14 +45,39 @@ def index_view(request):
 
 @require_POST
 def contact_submit_view(request):
-    # Cooldown flood protection: minimum 5 seconds between submissions
-    last_submit = request.session.get("last_contact_submit_time", 0)
-    current_time = time.time()
-    if current_time - last_submit < 5:
+    client_ip = get_client_ip(request)
+
+    # 1. IP Cooldown (Anti-Spam Flood Protection: 25 seconds between messages)
+    cooldown_key = f"contact_cooldown_{client_ip}"
+    if cache.get(cooldown_key):
         return JsonResponse(
             {
                 "success": False,
-                "message": "Please wait a few seconds before submitting another message.",
+                "message": "You are submitting too fast. Please wait 25 seconds before sending another message.",
+            },
+            status=429,
+        )
+
+    # 2. Hourly Quota (Maximum 5 messages per hour per IP)
+    hourly_key = f"contact_hourly_{client_ip}"
+    hourly_count = cache.get(hourly_key, 0)
+    if hourly_count >= 5:
+        return JsonResponse(
+            {
+                "success": False,
+                "message": "You have reached the maximum message limit for this hour. For urgent queries, please WhatsApp Deepak directly (+977 9829014425).",
+            },
+            status=429,
+        )
+
+    # 3. Session Cooldown Fallback
+    last_submit = request.session.get("last_contact_submit_time", 0)
+    current_time = time.time()
+    if current_time - last_submit < 20:
+        return JsonResponse(
+            {
+                "success": False,
+                "message": "Please wait a few moments before submitting another message.",
             },
             status=429,
         )
@@ -50,6 +86,10 @@ def contact_submit_view(request):
     if form.is_valid():
         contact_message = form.save()
         request.session["last_contact_submit_time"] = current_time
+
+        # Set 25-second cooldown and increment hourly count
+        cache.set(cooldown_key, True, 25)
+        cache.set(hourly_key, hourly_count + 1, 3600)
 
         # Print alert directly to terminal running runserver
         print(f"\n{'='*55}\n📩 [NEW CONTACT MESSAGE RECEIVED ON PORTFOLIO]\nFrom: {contact_message.name} <{contact_message.email}>\nSubject: {contact_message.subject or 'No Subject'}\nMessage:\n{contact_message.message}\n{'='*55}\n")
