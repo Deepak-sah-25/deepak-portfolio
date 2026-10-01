@@ -50,6 +50,35 @@ def contact_submit_view(request):
     if form.is_valid():
         contact_message = form.save()
         request.session["last_contact_submit_time"] = current_time
+
+        # Print alert directly to terminal running runserver
+        print(f"\n{'='*55}\n📩 [NEW CONTACT MESSAGE RECEIVED ON PORTFOLIO]\nFrom: {contact_message.name} <{contact_message.email}>\nSubject: {contact_message.subject or 'No Subject'}\nMessage:\n{contact_message.message}\n{'='*55}\n")
+
+        # Send email alert to Deepak if mail backend is configured
+        try:
+            from django.core.mail import send_mail
+            from django.conf import settings
+
+            email_subject = f"Portfolio Message from {contact_message.name}: {contact_message.subject or 'No Subject'}"
+            email_body = (
+                f"You received a new inquiry on your Deepak Sah Kanu Portfolio website!\n\n"
+                f"Name: {contact_message.name}\n"
+                f"Email: {contact_message.email}\n"
+                f"Subject: {contact_message.subject or 'None'}\n"
+                f"Message:\n{contact_message.message}\n\n"
+                f"Quick reply by clicking: mailto:{contact_message.email}\n"
+            )
+            recipient = getattr(settings, "CONTACT_NOTIFICATION_EMAIL", "deepakraj90054@email.com")
+            send_mail(
+                subject=email_subject,
+                message=email_body,
+                from_email=getattr(settings, "DEFAULT_FROM_EMAIL", "noreply@deepaksah.com.np"),
+                recipient_list=[recipient],
+                fail_silently=True,
+            )
+        except Exception:
+            pass
+
         return JsonResponse(
             {
                 "success": True,
