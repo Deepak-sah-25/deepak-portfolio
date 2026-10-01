@@ -79,10 +79,44 @@ def contact_submit_view(request):
         except Exception:
             pass
 
+        # Automated WhatsApp alert via CallMeBot (if API key is set)
+        try:
+            from django.conf import settings
+            import urllib.request
+            import urllib.parse
+
+            callmebot_key = getattr(settings, "CALLMEBOT_APIKEY", "")
+            callmebot_phone = getattr(settings, "CALLMEBOT_PHONE", "9779829014425")
+            if callmebot_key and callmebot_phone:
+                wa_alert_text = (
+                    f"🔔 *New Portfolio Message!*\n"
+                    f"*From:* {contact_message.name}\n"
+                    f"*Email:* {contact_message.email}\n"
+                    f"*Subject:* {contact_message.subject or 'None'}\n\n"
+                    f"*Message:*\n{contact_message.message}"
+                )
+                encoded_text = urllib.parse.quote(wa_alert_text)
+                api_url = f"https://api.callmebot.com/whatsapp.php?phone={callmebot_phone}&text={encoded_text}&apikey={callmebot_key}"
+                req = urllib.request.Request(api_url, headers={"User-Agent": "Mozilla/5.0"})
+                urllib.request.urlopen(req, timeout=4)
+        except Exception:
+            pass
+
+        # Create direct prefilled WhatsApp URL for the client/sender
+        import urllib.parse
+        wa_followup = (
+            f"Hi Deepak, I just submitted an inquiry on your portfolio website!\n\n"
+            f"Name: {contact_message.name}\n"
+            f"Subject: {contact_message.subject or 'Project Scope'}\n"
+            f"Message: {contact_message.message}"
+        )
+        prefilled_wa_url = f"https://wa.me/9779829014425?text={urllib.parse.quote(wa_followup)}"
+
         return JsonResponse(
             {
                 "success": True,
-                "message": f"Thank you, {contact_message.name}! Your message has been sent successfully. Deepak will get back to you shortly.",
+                "message": f"Thank you, {contact_message.name}! Your message has been sent successfully.",
+                "whatsapp_url": prefilled_wa_url,
             }
         )
     else:

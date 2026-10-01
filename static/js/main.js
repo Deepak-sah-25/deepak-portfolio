@@ -316,14 +316,14 @@ document.addEventListener('DOMContentLoaded', () => {
   const toastText = document.getElementById('toastText');
   const submitBtn = document.getElementById('submitBtn');
 
-  function showToast(message, isSuccess = true) {
+  function showToast(messageHtml, isSuccess = true) {
     if (!toastNotice || !toastText) return;
-    toastText.textContent = message;
+    toastText.innerHTML = messageHtml;
     toastNotice.querySelector('.toast-icon').textContent = isSuccess ? '✓' : '⚠';
     toastNotice.classList.add('show');
     setTimeout(() => {
       toastNotice.classList.remove('show');
-    }, 4500);
+    }, 6500);
   }
 
   if (contactForm) {
@@ -348,7 +348,11 @@ document.addEventListener('DOMContentLoaded', () => {
       .then(res => res.json().then(data => ({ ok: res.ok, data })))
       .then(({ ok, data }) => {
         if (ok && data.success) {
-          showToast(data.message, true);
+          let toastHtml = `<span>${data.message}</span>`;
+          if (data.whatsapp_url) {
+            toastHtml += ` <br><a href="${data.whatsapp_url}" target="_blank" rel="noopener noreferrer" style="color: #4ade80; text-decoration: underline; font-weight: 700; margin-top: 4px; display: inline-block;">📱 Also ping Deepak on WhatsApp ↗</a>`;
+          }
+          showToast(toastHtml, true);
           contactForm.reset();
         } else {
           showToast(data.message || 'An error occurred while submitting.', false);
