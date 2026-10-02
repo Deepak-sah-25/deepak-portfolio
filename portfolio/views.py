@@ -91,12 +91,16 @@ def contact_submit_view(request):
         cache.set(cooldown_key, True, 25)
         cache.set(hourly_key, hourly_count + 1, 3600)
 
-        # Print alert directly to terminal running runserver
-        print(f"\n{'='*55}\n📩 [NEW CONTACT MESSAGE RECEIVED ON PORTFOLIO]\nFrom: {contact_message.name} <{contact_message.email}>\nSubject: {contact_message.subject or 'No Subject'}\nMessage:\n{contact_message.message}\n{'='*55}\n")
+        # Print alert directly to terminal / Render server logs immediately
+        print(
+            f"\n{'='*55}\n📩 [NEW CONTACT MESSAGE RECEIVED ON PORTFOLIO]\nFrom: {contact_message.name} <{contact_message.email}>\nSubject: {contact_message.subject or 'No Subject'}\nMessage:\n{contact_message.message}\n{'='*55}\n",
+            flush=True,
+        )
 
-        # Send email alert to Deepak if mail backend is configured
+        # 1. Send Email Alert (Supports Resend HTTPS API for Render free tier + Django SMTP)
         try:
-            from django.core.mail import send_mail
+            import json
+            import urllib.request
             from django.conf import settings
 
             email_subject = f"Portfolio Message from {contact_message.name}: {contact_message.subject or 'No Subject'}"
@@ -108,18 +112,41 @@ def contact_submit_view(request):
                 f"Message:\n{contact_message.message}\n\n"
                 f"Quick reply by clicking: mailto:{contact_message.email}\n"
             )
-            recipient = getattr(settings, "CONTACT_NOTIFICATION_EMAIL", "deepakraj90054@email.com")
-            send_mail(
-                subject=email_subject,
-                message=email_body,
-                from_email=getattr(settings, "DEFAULT_FROM_EMAIL", "noreply@deepaksah.com.np"),
-                recipient_list=[recipient],
-                fail_silently=True,
-            )
-        except Exception:
-            pass
+            recipient = getattr(settings, "CONTACT_NOTIFICATION_EMAIL", "deepakraj90054@gmail.com")
 
-        # Automated WhatsApp alert via CallMeBot (if API key is set)
+            # Check for Resend API Key (Bypasses Render's port 587 block, 100% free)
+            resend_key = getattr(settings, "RESEND_API_KEY", "")
+            if resend_key:
+                resend_payload = json.dumps({
+                    "from": "Deepak Portfolio <onboarding@resend.dev>",
+                    "to": [recipient],
+                    "subject": email_subject,
+                    "text": email_body,
+                }).encode("utf-8")
+                req = urllib.request.Request(
+                    "https://api.resend.com/emails",
+                    data=resend_payload,
+                    headers={
+                        "Authorization": f"Bearer {resend_key}",
+                        "Content-Type": "application/json",
+                        "User-Agent": "Mozilla/5.0",
+                    },
+                )
+                urllib.request.urlopen(req, timeout=6)
+            else:
+                # Fallback to standard Django SMTP (Local PC or Open SMTP ports)
+                from django.core.mail import send_mail
+                send_mail(
+                    subject=email_subject,
+                    message=email_body,
+                    from_email=getattr(settings, "DEFAULT_FROM_EMAIL", "noreply@deepaksah.com.np"),
+                    recipient_list=[recipient],
+                    fail_silently=True,
+                )
+        except Exception as e:
+            print(f"[Email Notification Warning] {e}", flush=True)
+
+        # 2. Automated WhatsApp alert via CallMeBot (if API key is set)
         try:
             from django.conf import settings
             import urllib.request
@@ -139,6 +166,29 @@ def contact_submit_view(request):
                 api_url = f"https://api.callmebot.com/whatsapp.php?phone={callmebot_phone}&text={encoded_text}&apikey={callmebot_key}"
                 req = urllib.request.Request(api_url, headers={"User-Agent": "Mozilla/5.0"})
                 urllib.request.urlopen(req, timeout=4)
+        except Exception:
+            pass
+
+        # 3. Optional Instant Telegram Alert (Free & 100% reliable on Render)
+        try:
+            from django.conf import settings
+            import urllib.request
+            import urllib.parse
+
+            tg_token = getattr(settings, "TELEGRAM_BOT_TOKEN", "")
+            tg_chat_id = getattr(settings, "TELEGRAM_CHAT_ID", "")
+            if tg_token and tg_chat_id:
+                tg_msg = (
+                    f"🔔 *New Portfolio Inquiry*\n\n"
+                    f"👤 *Name:* {contact_message.name}\n"
+                    f"📧 *Email:* {contact_message.email}\n"
+                    f"📝 *Subject:* {contact_message.subject or 'N/A'}\n\n"
+                    f"💬 *Message:*\n{contact_message.message}"
+                )
+                tg_url = f"https://api.telegram.org/bot{tg_token}/sendMessage"
+                tg_payload = urllib.parse.urlencode({"chat_id": tg_chat_id, "text": tg_msg, "parse_mode": "Markdown"}).encode("utf-8")
+                tg_req = urllib.request.Request(tg_url, data=tg_payload, headers={"User-Agent": "Mozilla/5.0"})
+                urllib.request.urlopen(tg_req, timeout=4)
         except Exception:
             pass
 

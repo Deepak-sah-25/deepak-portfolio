@@ -201,4 +201,11 @@ CONTACT_NOTIFICATION_EMAIL = os.environ.get('CONTACT_NOTIFICATION_EMAIL', 'deepa
 CALLMEBOT_APIKEY = os.environ.get('CALLMEBOT_APIKEY', '')
 CALLMEBOT_PHONE = os.environ.get('CALLMEBOT_PHONE', '9779829014425')
 
+# Free HTTPS Email API via Resend (Bypasses Render's port 587 block)
+RESEND_API_KEY = os.environ.get('RESEND_API_KEY', '')
+
+# Free Instant Telegram Notification (Optional)
+TELEGRAM_BOT_TOKEN = os.environ.get('TELEGRAM_BOT_TOKEN', '')
+TELEGRAM_CHAT_ID = os.environ.get('TELEGRAM_CHAT_ID', '')
+
 
