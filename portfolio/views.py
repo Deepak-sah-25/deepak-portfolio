@@ -115,8 +115,10 @@ def contact_submit_view(request):
             recipient = getattr(settings, "CONTACT_NOTIFICATION_EMAIL", "deepakraj90054@gmail.com")
 
             # Check for Resend API Key (Bypasses Render's port 587 block, 100% free)
-            resend_key = getattr(settings, "RESEND_API_KEY", "")
+            import os
+            resend_key = (getattr(settings, "RESEND_API_KEY", "") or os.environ.get("RESEND_API_KEY", "")).strip()
             if resend_key:
+                print(f"[Email Notification] Sending via Resend API to {recipient}...", flush=True)
                 resend_payload = json.dumps({
                     "from": "Deepak Portfolio <onboarding@resend.dev>",
                     "to": [recipient],
@@ -132,8 +134,10 @@ def contact_submit_view(request):
                         "User-Agent": "Mozilla/5.0",
                     },
                 )
-                urllib.request.urlopen(req, timeout=6)
+                with urllib.request.urlopen(req, timeout=8) as response:
+                    print(f"[Email Notification] Resend API SUCCESS: {response.read().decode('utf-8')}", flush=True)
             else:
+                print("[Email Notification Warning] RESEND_API_KEY is NOT set in Render Environment variables! Attempting SMTP fallback...", flush=True)
                 # Fallback to standard Django SMTP (Local PC or Open SMTP ports)
                 from django.core.mail import send_mail
                 send_mail(
@@ -144,7 +148,12 @@ def contact_submit_view(request):
                     fail_silently=True,
                 )
         except Exception as e:
-            print(f"[Email Notification Warning] {e}", flush=True)
+            print(f"[Email Notification Error] {e}", flush=True)
+            if hasattr(e, "read"):
+                try:
+                    print(f"[Email Notification Error Detail] {e.read().decode('utf-8')}", flush=True)
+                except Exception:
+                    pass
 
         # 2. Automated WhatsApp alert via CallMeBot (if API key is set)
         try:
