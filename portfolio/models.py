@@ -2,7 +2,7 @@ from django.db import models
 
 
 class Profile(models.Model):
-    name = models.CharField(max_length=150, default="Deepak Sah Kanu")
+    name = models.CharField(max_length=150, default="Deepak Sah")
     short_title = models.CharField(max_length=150, default="Django Developer")
     extended_title = models.CharField(
         max_length=200, default="Django Developer | Full-Stack Web Developer"
@@ -17,7 +17,7 @@ class Profile(models.Model):
     )
     bio_intro = models.TextField(
         default=(
-            "I am Deepak Sah Kanu, a Django Developer and Full-Stack Web Developer focused on building modern, "
+            "I am Deepak Sah, a Django Developer and Full-Stack Web Developer focused on building modern, "
             "scalable, secure, and user-friendly web applications. I primarily work with Python and Django on the backend "
             "and HTML, CSS, JavaScript, and Bootstrap on the frontend."
         )

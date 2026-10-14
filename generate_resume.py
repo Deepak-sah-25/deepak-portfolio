@@ -36,7 +36,7 @@ def build_deepak_resume():
 
     # ------------------ HEADER (Left Column) ------------------
     y = 806
-    pdf.add_text(margin_x, y, "DEEPAK SAH KANU", font="F1", size=18, r=0.07, g=0.1, b=0.16)
+    pdf.add_text(margin_x, y, "DEEPAK SAH", font="F1", size=18, r=0.07, g=0.1, b=0.16)
     y -= 18
     
     pdf.add_text(margin_x, y, "Full-Stack Django Developer", font="F1", size=11, r=0.45, g=0.25, b=0.85)
@@ -207,7 +207,10 @@ def build_deepak_resume():
 
 if __name__ == "__main__":
     pdf_data = build_deepak_resume()
-    output_path = "static/files/Deepak_Sah_Kanu_Resume.pdf"
+    output_path = "static/files/Deepak_Sah_Resume.pdf"
     with open(output_path, "wb") as f:
+        f.write(pdf_data)
+    # Also write Deepak_Sah_Kanu_Resume.pdf for backward compatibility
+    with open("static/files/Deepak_Sah_Kanu_Resume.pdf", "wb") as f:
         f.write(pdf_data)
     print(f"Resume written to {output_path}, total bytes: {len(pdf_data)}")

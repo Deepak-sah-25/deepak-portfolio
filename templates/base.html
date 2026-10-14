@@ -18,7 +18,7 @@
 
     <!-- Meta SEO -->
     <meta name="description" content="{{ profile.name }} - {{ profile.extended_title }}. {{ profile.hero_tagline }} Based in {{ profile.location }}. Specializing in Python, Django, DRF, and PostgreSQL.">
-    <meta name="keywords" content="Deepak Sah Kanu, Django Developer, Full-Stack Developer, Python, Django, DRF, PostgreSQL, Multi-Tenant SaaS, Kathmandu, Lalitpur, Nepal, Software Engineer">
+    <meta name="keywords" content="Deepak Sah, Django Developer, Full-Stack Developer, Python, Django, DRF, PostgreSQL, Multi-Tenant SaaS, Kathmandu, Lalitpur, Nepal, Software Engineer">
 
     <!-- Open Graph / Facebook / LinkedIn / WhatsApp -->
     <meta property="og:type" content="profile">
@@ -28,7 +28,7 @@
     <meta property="og:url" content="{{ request.scheme }}://{{ request.get_host }}{{ request.path }}">
     <meta property="og:locale" content="en_US">
     <meta property="profile:first_name" content="Deepak">
-    <meta property="profile:last_name" content="Sah Kanu">
+    <meta property="profile:last_name" content="Sah">
     <meta property="og:image" content="{{ request.scheme }}://{{ request.get_host }}{% if profile.profile_image %}{{ profile.profile_image.url }}{% else %}{% static 'images/deepak.jpg' %}{% endif %}">
     <meta property="og:image:alt" content="{{ profile.name }} - {{ profile.short_title }}">
 
@@ -82,8 +82,8 @@
         <header class="site-header">
             <div class="container-custom">
                 <div class="navbar-inner">
-                    <a href="#hero" class="brand-logo" aria-label="Deepak Sah Kanu">
-                        <img src="{% static 'images/deepak_logo.jpg' %}" alt="Deepak Sah Kanu Logo" class="brand-logo-img">
+                    <a href="#hero" class="brand-logo" aria-label="Deepak Sah">
+                        <img src="{% static 'images/deepak_logo.jpg' %}" alt="Deepak Sah Logo" class="brand-logo-img">
                         <span class="brand-name">{{ profile.name }}</span>
                     </a>
 
@@ -148,8 +148,8 @@
                 <div class="footer-top-grid">
                     <!-- Brand Column -->
                     <div class="footer-brand-col">
-                        <a href="#hero" class="footer-brand-logo" aria-label="Deepak Sah Kanu">
-                            <img src="{% static 'images/deepak_logo.jpg' %}" alt="Deepak Sah Kanu Logo" class="footer-brand-logo-img">
+                        <a href="#hero" class="footer-brand-logo" aria-label="Deepak Sah">
+                            <img src="{% static 'images/deepak_logo.jpg' %}" alt="Deepak Sah Logo" class="footer-brand-logo-img">
                             <span class="brand-name">{{ profile.name }}</span>
                         </a>
                         <p class="footer-brand-bio">

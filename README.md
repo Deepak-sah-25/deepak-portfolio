@@ -1,4 +1,4 @@
-# 🚀 Deepak Sah Kanu — Developer Portfolio & Systems Showcase
+# 🚀 Deepak Sah — Developer Portfolio & Systems Showcase
 
 A modern, high-performance personal portfolio website engineered with **Python**, **Django 6**, and **PostgreSQL**. Designed for recruiters, engineering managers, and clients to explore production projects, system architecture, technical skills, and download a verifiable ATS-friendly resume.
 
@@ -94,7 +94,7 @@ All 12 automated unit tests cover:
 
 ---
 
-## 🌐 Deploy to Render / Railway
+## 🌐 Deploy to Render 
 
 This repository includes a production `build.sh` script:
 1. Create a new **Web Service** on [Render.com](https://render.com/) or [Railway.app](https://railway.app/).
@@ -111,7 +111,7 @@ This repository includes a production `build.sh` script:
 
 ## 📬 Contact & Connect
 
-- **Name**: Deepak Sah Kanu
+- **Name**: Deepak Sah
 - **Role**: Full-Stack Django Developer | DRF & PostgreSQL
 - **Location**: Kathmandu, Lalitpur, Nepal
 - **Email**: [deepakraj90054@email.com](mailto:deepakraj90054@email.com)

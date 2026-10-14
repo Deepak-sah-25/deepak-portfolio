@@ -18,7 +18,7 @@ class PortfolioTests(TestCase):
         cache.clear()
         self.client = Client()
         self.profile = Profile.objects.create(
-            name="Deepak Sah Kanu",
+            name="Deepak Sah",
             short_title="Django Developer",
             extended_title="Django Developer | Full-Stack Web Developer",
             hero_tagline="Building modern, scalable web applications with Django.",
@@ -79,7 +79,7 @@ class PortfolioTests(TestCase):
     def test_index_view_status_and_content(self):
         response = self.client.get(reverse("portfolio:index"))
         self.assertEqual(response.status_code, 200)
-        self.assertContains(response, "Deepak Sah Kanu")
+        self.assertContains(response, "Deepak Sah")
         self.assertContains(response, "Anjan Hospital Management System")
         self.assertContains(response, "Anjan lab company")
         self.assertContains(response, "Technologies I Master")
@@ -123,7 +123,7 @@ class PortfolioTests(TestCase):
         self.assertIn("Python", data["technologies"])
 
     def test_models_str_and_helpers(self):
-        self.assertEqual(str(self.profile), "Deepak Sah Kanu (Django Developer)")
+        self.assertEqual(str(self.profile), "Deepak Sah (Django Developer)")
         self.assertEqual(str(self.category), "Backend Development")
         self.assertEqual(str(self.skill), "Django (95%)")
         self.assertEqual(str(self.project), "Anjan Hospital Management System")

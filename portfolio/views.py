@@ -105,7 +105,7 @@ def contact_submit_view(request):
 
             email_subject = f"Portfolio Message from {contact_message.name}: {contact_message.subject or 'No Subject'}"
             email_body = (
-                f"You received a new inquiry on your Deepak Sah Kanu Portfolio website!\n\n"
+                f"You received a new inquiry on your Deepak Sah Portfolio website!\n\n"
                 f"Name: {contact_message.name}\n"
                 f"Email: {contact_message.email}\n"
                 f"Subject: {contact_message.subject or 'None'}\n"
@@ -264,12 +264,14 @@ def download_resume_view(request):
         except Exception:
             pass
 
-    default_resume = settings.BASE_DIR / "static" / "files" / "Deepak_Sah_Kanu_Resume.pdf"
+    default_resume = settings.BASE_DIR / "static" / "files" / "Deepak_Sah_Resume.pdf"
+    if not default_resume.exists():
+        default_resume = settings.BASE_DIR / "static" / "files" / "Deepak_Sah_Kanu_Resume.pdf"
     if default_resume.exists():
         return FileResponse(
             open(default_resume, "rb"),
             as_attachment=True,
-            filename="Deepak_Sah_Kanu_Resume.pdf",
+            filename="Deepak_Sah_Resume.pdf",
         )
 
     return HttpResponse(

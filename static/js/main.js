@@ -1,5 +1,5 @@
 /**
- * Deepak Sah Kanu - Portfolio JavaScript
+ * Deepak Sah - Portfolio JavaScript
  * Modern Interactive Behaviors & High Performance Animations
  */
 

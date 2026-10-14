@@ -13,7 +13,7 @@ from portfolio.models import (
 
 
 class Command(BaseCommand):
-    help = "Seed database with Deepak Sah Kanu's exact portfolio profile and project data."
+    help = "Seed database with Deepak Sah's exact portfolio profile and project data."
 
     def _sync_media_assets(self):
         """Ensure media directories exist and sync essential logos/profile images from static."""
@@ -42,14 +42,14 @@ class Command(BaseCommand):
                 shutil.copy2(static_logo, media_logo)
 
     def handle(self, *args, **options):
-        self.stdout.write(self.style.NOTICE("Seeding Deepak Sah Kanu's portfolio data..."))
+        self.stdout.write(self.style.NOTICE("Seeding Deepak Sah's portfolio data..."))
 
         # Synchronize media assets from static assets for fresh deployments
         self._sync_media_assets()
 
         # 1. Profile
         profile, created = Profile.objects.get_or_create(id=1)
-        profile.name = "Deepak Sah Kanu"
+        profile.name = "Deepak Sah"
         profile.short_title = "Django Developer"
         profile.extended_title = "Full-Stack Django Developer | DRF & PostgreSQL"
         profile.hero_tagline = "Building modern, scalable web applications with Django."
@@ -438,4 +438,4 @@ class Command(BaseCommand):
             svc.save()
 
         self.stdout.write(self.style.SUCCESS("✓ Services configured"))
-        self.stdout.write(self.style.SUCCESS("🎉 Successfully seeded all portfolio data for Deepak Sah Kanu!"))
+        self.stdout.write(self.style.SUCCESS("🎉 Successfully seeded all portfolio data for Deepak Sah!"))
