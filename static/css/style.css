@@ -271,17 +271,18 @@ body {
 }
 
 .brand-name {
-  font-family: var(--font-heading, var(--font-mono));
-  font-size: 1.05rem;
+  font-family: var(--font-mono);
+  font-size: 1.18rem;
   font-weight: 700;
   color: var(--text-primary);
   letter-spacing: -0.01em;
-  transition: color 0.2s ease;
+  transition: color 0.2s ease, text-shadow 0.2s ease;
 }
 
-.brand-logo:hover .brand-name {
+.brand-logo:hover .brand-name,
+.footer-brand-logo:hover .brand-name {
   color: #ffffff;
-  text-shadow: 0 0 10px rgba(139, 92, 246, 0.6);
+  text-shadow: 0 0 14px rgba(139, 92, 246, 0.6);
 }
 
 .brand-tagline {
@@ -1931,10 +1932,7 @@ body {
     height: 38px !important;
   }
   .brand-name {
-    font-size: 0.96rem !important;
-  }
-  .brand-tagline {
-    font-size: 0.62rem !important;
+    font-size: 1.05rem !important;
   }
   .nav-links, .nav-cta {
     display: none !important;
@@ -2112,11 +2110,7 @@ body {
     height: 34px !important;
   }
   .brand-name {
-    font-size: 0.88rem !important;
-  }
-  .brand-tagline {
-    font-size: 0.58rem !important;
-    letter-spacing: 0.02em !important;
+    font-size: 0.96rem !important;
   }
   .hero-title {
     font-size: 2rem !important;

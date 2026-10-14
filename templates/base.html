@@ -82,12 +82,9 @@
         <header class="site-header">
             <div class="container-custom">
                 <div class="navbar-inner">
-                    <a href="#hero" class="brand-logo" aria-label="Deepak Sah Kanu - Nepal's Best Engineer">
+                    <a href="#hero" class="brand-logo" aria-label="Deepak Sah Kanu">
                         <img src="{% static 'images/deepak_logo.jpg' %}" alt="Deepak Sah Kanu Logo" class="brand-logo-img">
-                        <div class="brand-text-group">
-                            <span class="brand-name">{{ profile.name }}</span>
-                            <span class="brand-tagline">Nepal's Best Engineer <span class="flag-icon">🇳🇵</span></span>
-                        </div>
+                        <span class="brand-name">{{ profile.name }}</span>
                     </a>
 
                     <nav>
@@ -151,12 +148,9 @@
                 <div class="footer-top-grid">
                     <!-- Brand Column -->
                     <div class="footer-brand-col">
-                        <a href="#hero" class="footer-brand-logo" aria-label="Deepak Sah Kanu - Nepal's Best Engineer">
+                        <a href="#hero" class="footer-brand-logo" aria-label="Deepak Sah Kanu">
                             <img src="{% static 'images/deepak_logo.jpg' %}" alt="Deepak Sah Kanu Logo" class="footer-brand-logo-img">
-                            <div class="brand-text-group">
-                                <span class="brand-name">{{ profile.name }}</span>
-                                <span class="brand-tagline">Nepal's Best Engineer <span class="flag-icon">🇳🇵</span></span>
-                            </div>
+                            <span class="brand-name">{{ profile.name }}</span>
                         </a>
                         <p class="footer-brand-bio">
                             Full-Stack Django Developer specializing in scalable backend architectures, REST APIs, PostgreSQL, and multi-tenant SaaS systems.
