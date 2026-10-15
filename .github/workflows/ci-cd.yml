@@ -1,0 +1,78 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  test:
+    name: 🧪 Run Tests & System Checks
+    runs-on: ubuntu-latest
+
+    env:
+      SECRET_KEY: "django-ci-test-secret-key-not-for-production-environment"
+      DEBUG: "False"
+      ALLOWED_HOSTS: "localhost,127.0.0.1,testserver"
+
+    steps:
+      - name: 📥 Check out repository code
+        uses: actions/checkout@v4
+
+      - name: 🐍 Set up Python 3.12
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: "pip"
+
+      - name: 📦 Install Python dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: 🔍 Django System Check
+        run: |
+          python manage.py check
+
+      - name: 🗄️ Verify Migrations Consistency
+        run: |
+          python manage.py makemigrations --check --dry-run
+
+      - name: 🎨 Verify Static Files Collection
+        run: |
+          python manage.py collectstatic --noinput
+
+      - name: 🧪 Run Django Unit Tests
+        run: |
+          python manage.py test --verbosity=2
+
+  deploy:
+    name: 🚀 Deploy to Render
+    needs: test
+    if: github.ref == 'refs/heads/main' && (github.event_name == 'push' || github.event_name == 'workflow_dispatch')
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 🌐 Trigger Render Deploy Hook
+        env:
+          RENDER_DEPLOY_HOOK: ${{ secrets.RENDER_DEPLOY_HOOK_URL }}
+        run: |
+          HOOK_URL="${RENDER_DEPLOY_HOOK:-https://api.render.com/deploy/srv-davc4jfavr4c73bdl8c0?key=VEiAlXLNkdU}"
+          echo "🚀 Triggering automatic production deployment to Render..."
+          response=$(curl -s -w "\n%{http_code}" -X POST "$HOOK_URL")
+          http_code=$(echo "$response" | tail -n1)
+          response_body=$(echo "$response" | sed '$d')
+          echo "HTTP Status Code: $http_code"
+          echo "Render Response Body: $response_body"
+          if [ "$http_code" -ge 200 ] && [ "$http_code" -lt 300 ]; then
+            echo "✅ Successfully dispatched deployment to Render (dev-deepaksah.onrender.com)!"
+          else
+            echo "❌ Deployment trigger failed with HTTP status: $http_code"
+            exit 1
+          fi
