@@ -224,7 +224,7 @@
         <div class="skills-grid reveal-init">
             {% for cat in categories %}
                 {% for skill in cat.skills.all %}
-                <div class="glass-card skill-card" data-category="{{ cat.slug }}">
+                <div class="glass-card skill-card" data-category="{{ cat.slug }}" data-proficiency="{{ skill.proficiency }}">
                     <div class="skill-header">
                         <div class="skill-title-wrap">
                             <div class="skill-icon">
@@ -241,11 +241,11 @@
                             </div>
                             <span class="skill-name">{{ skill.name }}</span>
                         </div>
-                        <span class="skill-percentage">{{ skill.proficiency }}%</span>
+                        <span class="skill-percentage" data-target="{{ skill.proficiency }}">0%</span>
                     </div>
 
                     <div class="skill-bar-track">
-                        <div class="skill-bar-fill" data-width="{{ skill.proficiency }}%"></div>
+                        <div class="skill-bar-fill" data-width="{{ skill.proficiency }}%" style="width: 0%;"></div>
                     </div>
                 </div>
                 {% endfor %}

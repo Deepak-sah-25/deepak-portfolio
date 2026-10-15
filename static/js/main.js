@@ -122,14 +122,6 @@ document.addEventListener('DOMContentLoaded', () => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
           entry.target.classList.add('reveal-active');
-          
-          // Animate skill bars inside this element if any
-          const skillBars = entry.target.querySelectorAll('.skill-bar-fill');
-          skillBars.forEach(bar => {
-            const targetWidth = bar.getAttribute('data-width') || '90%';
-            bar.style.width = targetWidth;
-          });
-
           observer.unobserve(entry.target);
         }
       });
@@ -143,10 +135,6 @@ document.addEventListener('DOMContentLoaded', () => {
     // Fallback: immediately show elements
     revealElements.forEach(el => {
       el.classList.add('reveal-active');
-      const skillBars = el.querySelectorAll('.skill-bar-fill');
-      skillBars.forEach(bar => {
-        bar.style.width = bar.getAttribute('data-width') || '90%';
-      });
     });
   }
 
@@ -171,31 +159,121 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // 6. Interactive Skill Category Tabs
-  const skillTabs = document.querySelectorAll('.tab-btn[data-category]');
+  // 6. Enhanced Skills Animation: Smooth Numerical Count-up & Gradual Bar Fill ("Slowly Slowly Increase")
+  const skillsGrid = document.querySelector('.skills-grid');
   const skillCards = document.querySelectorAll('.skill-card');
+  const skillTabs = document.querySelectorAll('.tab-btn[data-category]');
 
-  skillTabs.forEach(tab => {
-    tab.addEventListener('click', () => {
-      skillTabs.forEach(t => t.classList.remove('active'));
-      tab.classList.add('active');
+  function animateSkillCard(card, delay = 0) {
+    const percentageEl = card.querySelector('.skill-percentage');
+    const barFill = card.querySelector('.skill-bar-fill');
+    if (!percentageEl || !barFill) return;
 
-      const targetCategory = tab.getAttribute('data-category');
+    const rawTarget = percentageEl.getAttribute('data-target') ||
+                      card.getAttribute('data-proficiency') ||
+                      (barFill.getAttribute('data-width') ? barFill.getAttribute('data-width').replace('%', '') : '90');
+    const targetProficiency = Math.min(Math.max(parseInt(rawTarget, 10) || 90, 0), 100);
 
-      skillCards.forEach(card => {
-        const cardCat = card.getAttribute('data-category');
-        if (targetCategory === 'all' || cardCat === targetCategory) {
-          card.style.display = 'block';
-          setTimeout(() => {
-            const fill = card.querySelector('.skill-bar-fill');
-            if (fill) fill.style.width = fill.getAttribute('data-width') || '90%';
-          }, 50);
+    // Cancel any running animations or pending delays on this card
+    if (card._animFrame) {
+      cancelAnimationFrame(card._animFrame);
+      card._animFrame = null;
+    }
+    if (card._delayTimeout) {
+      clearTimeout(card._delayTimeout);
+      card._delayTimeout = null;
+    }
+
+    // Reset visually to 0 before starting animation
+    percentageEl.textContent = '0%';
+    barFill.style.width = '0%';
+
+    card._delayTimeout = setTimeout(() => {
+      const duration = 1800; // 1.8 seconds smooth relaxed climb
+      let startTime = null;
+
+      function step(timestamp) {
+        if (!startTime) startTime = timestamp;
+        const elapsed = timestamp - startTime;
+        const progress = Math.min(elapsed / duration, 1);
+
+        // easeOutCubic curve for relaxed and steady acceleration slowing into target
+        const ease = 1 - Math.pow(1 - progress, 3);
+        const currentVal = Math.round(ease * targetProficiency);
+
+        percentageEl.textContent = `${currentVal}%`;
+        barFill.style.width = `${(ease * targetProficiency).toFixed(1)}%`;
+
+        if (progress < 1) {
+          card._animFrame = requestAnimationFrame(step);
         } else {
-          card.style.display = 'none';
+          percentageEl.textContent = `${targetProficiency}%`;
+          barFill.style.width = `${targetProficiency}%`;
+          card._animFrame = null;
         }
+      }
+
+      card._animFrame = requestAnimationFrame(step);
+    }, delay);
+  }
+
+  function triggerSkillsCascade() {
+    const visibleCards = Array.from(skillCards).filter(
+      card => card.style.display !== 'none' && !card.classList.contains('hidden')
+    );
+    visibleCards.forEach((card, index) => {
+      // Staggered delay for sleek wave effect (capped at 400ms max delay)
+      const delay = Math.min(index * 45, 400);
+      animateSkillCard(card, delay);
+    });
+  }
+
+  // IntersectionObserver to trigger animation when skills section enters viewport
+  if (skillsGrid) {
+    let skillsAnimated = false;
+    if ('IntersectionObserver' in window) {
+      const skillsObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting && !skillsAnimated) {
+            skillsAnimated = true;
+            triggerSkillsCascade();
+            observer.unobserve(entry.target);
+          }
+        });
+      }, {
+        rootMargin: '0px 0px -40px 0px',
+        threshold: 0.15
+      });
+      skillsObserver.observe(skillsGrid);
+    } else {
+      triggerSkillsCascade();
+    }
+  }
+
+  // Interactive Skill Category Tabs with re-animation
+  if (skillTabs.length > 0) {
+    skillTabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        skillTabs.forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
+
+        const targetCategory = tab.getAttribute('data-category');
+        let visibleCount = 0;
+
+        skillCards.forEach(card => {
+          const cardCat = card.getAttribute('data-category');
+          if (targetCategory === 'all' || cardCat === targetCategory) {
+            card.style.display = 'block';
+            const delay = Math.min(visibleCount * 45, 360);
+            animateSkillCard(card, delay);
+            visibleCount++;
+          } else {
+            card.style.display = 'none';
+          }
+        });
       });
     });
-  });
+  }
 
   // 7. Project Details Modal Logic
   const modalOverlay = document.getElementById('projectModal');
